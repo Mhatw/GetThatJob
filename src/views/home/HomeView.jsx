@@ -7,7 +7,7 @@ export function HomeView() {
     <>
       <h1>HomeView</h1>
       <Link to="login/recruiter">Login </Link>
-      <Link to="signup">signup </Link>
+      <Link to="signup/recruiter">signup </Link>
       <Outlet />
     </>
   );

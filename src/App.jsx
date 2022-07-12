@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { HomeView, Login } from "./views/home";
+import { HomeView, Login, Signup } from "./views/home";
 import { LoginForm } from "./views/home/components";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
               element={<LoginForm user="professional" />}
             />
           </Route>
-          <Route path="signup" element={<h1>signup</h1>}>
+          <Route path="signup" element={<Signup />}>
             <Route path="recruiter" element={<h1>recruiter</h1>}>
               <Route path="step1" element={<h1>step1</h1>} />
               <Route path="step2" element={<h1>step2</h1>} />
