@@ -5,6 +5,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* home */}
         <Route path="/" element={<h1>home</h1>}>
           <Route path="login" element={<h1>login</h1>}>
             <Route path="recruiter" element={<h1>recruiter</h1>} />
@@ -22,6 +23,7 @@ function App() {
             </Route>
           </Route>
         </Route>
+        {/* dashboard */}
         <Route path="/dashboard" element={<h1>dashboard</h1>}>
           <Route path="recruiter" element={<h1>recruiter</h1>}>
             <Route path="post-job" element={<h1>post-job</h1>}>
@@ -48,6 +50,7 @@ function App() {
             </Route>
           </Route>
         </Route>
+        {/* logout */}
         <Route path="/logout" element={<h1>logout</h1>} />
       </Routes>
     </BrowserRouter>
