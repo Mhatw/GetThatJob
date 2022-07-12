@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { DashboardView } from "./views/dashboard";
 import { HomeView, Login, Signup } from "./views/home";
 import { LoginForm } from "./views/home/components";
 
@@ -22,7 +23,7 @@ function App() {
           </Route>
         </Route>
         {/* dashboard */}
-        <Route path="/dashboard" element={<h1>dashboard</h1>}>
+        <Route path="/dashboard" element={<DashboardView />}>
           <Route path="recruiter" element={<h1>recruiter</h1>}>
             <Route path="post-job" element={<h1>post-job</h1>}>
               <Route path="category:name" element={<h1>category:name</h1>} />
