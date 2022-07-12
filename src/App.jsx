@@ -17,15 +17,8 @@ function App() {
             />
           </Route>
           <Route path="signup" element={<Signup />}>
-            <Route path="recruiter" element={<h1>recruiter</h1>}>
-              <Route path="step1" element={<h1>step1</h1>} />
-              <Route path="step2" element={<h1>step2</h1>} />
-            </Route>
-            <Route path="professional" element={<h1>professional</h1>}>
-              <Route path="step1" element={<h1>step1</h1>} />
-              <Route path="step2" element={<h1>step2</h1>} />
-              <Route path="step3" element={<h1>step3</h1>} />
-            </Route>
+            <Route path="recruiter" element={<h1>recruiter</h1>} />
+            <Route path="professional" element={<h1>professional</h1>} />
           </Route>
         </Route>
         {/* dashboard */}
