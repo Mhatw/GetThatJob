@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { HomeView } from "./views/home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* home */}
-        <Route path="/" element={<h1>home</h1>}>
+        <Route path="/" element={<HomeView />}>
           <Route path="login" element={<h1>login</h1>}>
             <Route path="recruiter" element={<h1>recruiter</h1>} />
             <Route path="professional" element={<h1>professional</h1>} />
