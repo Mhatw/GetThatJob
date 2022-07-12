@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { HomeView } from "./views/home";
+import { HomeView, Login } from "./views/home";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <Routes>
         {/* home */}
         <Route path="/" element={<HomeView />}>
-          <Route path="login" element={<h1>login</h1>}>
+          <Route path="login" element={<Login />}>
             <Route path="recruiter" element={<h1>recruiter</h1>} />
             <Route path="professional" element={<h1>professional</h1>} />
           </Route>
