@@ -2,13 +2,12 @@ import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-export function FilterJob() {
+export function Job() {
   const params = useParams();
-  console.log(params);
   return (
     <>
-      <h1>FilterJob: {params?.filter}</h1>
-      <Link to="../job/2">All</Link>
+      <h1>Job {params?.id}</h1>
+      <Link to={`../apply/${params?.id}`}>apply</Link>
     </>
   );
 }
