@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { DashboardView } from "./views/dashboard";
-import { PostJob, Recruiter } from "./views/dashboard/recruiter";
+import { PostCategory, PostJob, Recruiter } from "./views/dashboard/recruiter";
 import { HomeView, Login, Signup } from "./views/home";
 import { LoginForm } from "./views/home/components";
 
@@ -27,7 +27,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardView />}>
           <Route path="recruiter" element={<Recruiter />}>
             <Route path="post-job" element={<PostJob />}>
-              <Route path="category:name" element={<h1>category:name</h1>} />
+              <Route path="category:category" element={<PostCategory />} />
               <Route path="show:job-id" element={<h1>show:job-id</h1>} />
             </Route>
             <Route path="create-job" element={<h1>create-job</h1>} />
