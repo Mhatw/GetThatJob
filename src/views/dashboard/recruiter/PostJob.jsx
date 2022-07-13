@@ -6,8 +6,8 @@ export function PostJob() {
   return (
     <>
       <h1>PostJob</h1>
-      <Link to="category:all">category</Link>
-      <Link to="show:job">Show Job</Link>
+      <Link to="category/all">category</Link>
+      <Link to="show/12">Show Job</Link>
       <Outlet />
     </>
   );
