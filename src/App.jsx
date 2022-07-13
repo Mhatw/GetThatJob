@@ -3,6 +3,7 @@ import "./App.css";
 import { DashboardView, EditProfile, Logout, Profile } from "./views/dashboard";
 import {
   Applies,
+  Company,
   FilterJob,
   FindJob,
   Following,
@@ -54,7 +55,7 @@ function App() {
               <Route path=":filter" element={<FilterJob />} />
               <Route path="job/:id" element={<Job />} />
               <Route path="job-apply/:id" element={<JobApply />} />
-              <Route path="company:id" element={<h1>company:id</h1>} />
+              <Route path="company/:id" element={<Company />} />
             </Route>
             <Route path="applies/:category" element={<Applies />} />
             <Route path="following" element={<Following />} />
