@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { DashboardView } from "./views/dashboard";
+import { DashboardView, EditProfile, Profile } from "./views/dashboard";
 import {
   CreateJob,
   PostCategory,
@@ -37,9 +37,8 @@ function App() {
               <Route path="show/:job" element={<ShowJob />} />
             </Route>
             <Route path="create-job" element={<CreateJob />} />
-            <Route path="profile" element={<h1>profile</h1>}>
-              <Route path="edit" element={<h1>edit</h1>} />
-            </Route>
+            <Route path="profile" element={<Profile />} />
+            <Route path="edit-profile" element={<EditProfile />} />
           </Route>
           <Route path="professional" element={<h1>professional</h1>}>
             <Route path="find-job" element={<h1>find-job</h1>}>
