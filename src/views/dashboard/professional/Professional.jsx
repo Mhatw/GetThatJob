@@ -6,7 +6,7 @@ export function Professional() {
   return (
     <>
       <h1>Professional</h1>
-      <Link to="find-job">Find Job</Link>
+      <Link to="find-job/all">Find Job</Link>
       <br />
       <Link to="applies/all">Your applications</Link>
       <br />
