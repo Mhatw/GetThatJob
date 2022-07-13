@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { DashboardView, EditProfile, Profile } from "./views/dashboard";
+import { Professional } from "./views/dashboard/professional";
 import {
   CreateJob,
   PostCategory,
@@ -40,7 +41,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="edit-profile" element={<EditProfile />} />
           </Route>
-          <Route path="professional" element={<h1>professional</h1>}>
+          <Route path="professional" element={<Professional />}>
             <Route path="find-job" element={<h1>find-job</h1>}>
               <Route path=":filter" element={<h1>:filter</h1>} />
               <Route path="job:id" element={<h1>job:id</h1>}>
