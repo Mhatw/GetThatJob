@@ -7,6 +7,7 @@ import {
   FindJob,
   Following,
   Job,
+  JobApply,
   Professional,
 } from "./views/dashboard/professional";
 import {
@@ -52,7 +53,7 @@ function App() {
             <Route path="find-job" element={<FindJob />}>
               <Route path=":filter" element={<FilterJob />} />
               <Route path="job/:id" element={<Job />} />
-              <Route path="apply/:id" element={<h1>apply</h1>} />
+              <Route path="job-apply/:id" element={<JobApply />} />
               <Route path="company:id" element={<h1>company:id</h1>} />
             </Route>
             <Route path="applies/:category" element={<Applies />} />

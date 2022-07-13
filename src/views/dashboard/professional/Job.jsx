@@ -7,7 +7,7 @@ export function Job() {
   return (
     <>
       <h1>Job {params?.id}</h1>
-      <Link to={`../apply/${params?.id}`}>apply</Link>
+      <Link to={`../job-apply/${params?.id}`}>apply</Link>
     </>
   );
 }
