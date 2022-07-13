@@ -11,13 +11,20 @@ const StyledHeader = styled.header`
   text-align: center;
   font-weight: bold;
   color: #333;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid red;
+  }
 `;
 export function Header() {
   return (
     <>
       <StyledHeader>
         <img src={Logo} alt="logo" />
-        <h1>Header</h1>
+        <div></div>
       </StyledHeader>
     </>
   );
