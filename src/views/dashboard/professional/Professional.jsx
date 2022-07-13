@@ -8,6 +8,8 @@ export function Professional() {
       <h1>Professional</h1>
       <Link to="find-job">Find Job</Link>
       <br />
+      <Link to="applies/all">Your applications</Link>
+      <br />
       <Link to="following">following</Link>
       <br />
       <Link to="profile">profile</Link>
