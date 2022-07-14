@@ -1,3 +1,5 @@
 import { LoginForm } from "./LoginForm";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
-export { LoginForm };
+export { LoginForm, Header, Footer };
