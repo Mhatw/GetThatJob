@@ -22,10 +22,14 @@ export function Header() {
         minWidth="max-content"
         alignItems="center"
         justifyContent="center"
+        background={"white"}
+        zIndex={5}
         gap="2"
         px={["0.5rem", "1rem", "2rem"]}
         py={["0.5rem", "1rem"]}
         boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        position="fixed"
+        w={"100%"}
       >
         <Link to="/">
           <Box p="2">

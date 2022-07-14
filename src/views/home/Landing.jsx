@@ -25,6 +25,7 @@ export function Landing() {
       <Container
         maxW={"full"}
         px={{ base: 10, md: 30 }}
+        pt={"5rem"}
         background={"gray.100"}
         display="flex"
         flexDirection="column"
