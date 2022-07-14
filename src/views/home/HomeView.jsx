@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, useOutlet } from "react-router";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 import { Landing } from "./Landing";
 
 export function HomeView() {
@@ -9,6 +9,7 @@ export function HomeView() {
     <>
       <Header />
       {outlet ? <Outlet /> : <Landing />}
+      <Footer />
     </>
   );
 }

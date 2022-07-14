@@ -1,13 +1,4 @@
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Heading, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import Mhatw from "../../../assets/cristian.jpg";
 import Alexis from "../../../assets/alexis.jpg";
