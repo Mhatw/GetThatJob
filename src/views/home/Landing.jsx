@@ -11,15 +11,26 @@ import {
   createIcon,
   Flex,
   useBoolean,
+  Image,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { LandingSvg } from "./components/svg/LandingSvg";
 import { useNavigate } from "react-router-dom";
+import OurTeam from "./components/OurTeam";
 export function Landing() {
   const [flag, setFlag] = useBoolean();
   const navigate = useNavigate();
   return (
     <>
-      <Container maxW={"3xl"} px={{ base: 10, md: 30 }}>
+      <Container
+        maxW={"full"}
+        px={{ base: 10, md: 30 }}
+        background={"gray.100"}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Stack
           as={Box}
           textAlign={"center"}
@@ -28,7 +39,7 @@ export function Landing() {
         >
           <Heading
             fontWeight={700}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
             lineHeight={"110%"}
           >
             The place where <br />
@@ -36,7 +47,7 @@ export function Landing() {
               you get that job
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
+          <Text color={"gray.500"} maxW={"xl"}>
             With our Machine Learning algorithm you will get that job in no
             time. We promise you! Just give us the money and we will take care
             of it.
@@ -52,10 +63,10 @@ export function Landing() {
               colorScheme="blue"
               onMouseEnter={setFlag.on}
               onMouseLeave={setFlag.off}
-              variant={flag ? "outline" : "solid"}
+              variant={{ base: "solid", md: `${flag ? "solid" : "outline"}` }}
               onClick={() => navigate("/signup/professional")}
             >
-              create an account now
+              Create an account now
             </Button>
             <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
               Learn more
@@ -90,6 +101,74 @@ export function Landing() {
           />
         </Flex>
       </Container>
+      {/* information */}
+      <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+        <Flex
+          p={8}
+          flex={1}
+          align={"center"}
+          justify={"center"}
+          background="blue.500"
+        >
+          <Stack spacing={6} w={"full"} maxW={"lg"}>
+            <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+              <Text
+                as={"span"}
+                color={"white"}
+                position={"relative"}
+                _after={{
+                  content: "''",
+                  width: "full",
+                  height: useBreakpointValue({ base: "20%", md: "20%" }),
+                  position: "absolute",
+                  bottom: -2,
+                  left: 0,
+                  bg: "orange.300",
+                  zIndex: 0,
+                }}
+              >
+                Find
+              </Text>
+              <br />{" "}
+              <Text color={"white"} as={"span"}>
+                your next job
+              </Text>{" "}
+            </Heading>
+            <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.200"}>
+              Our Machine learning algorithm is so good that it’s even illegal
+              in some countries. Join us to use our barelly legal algorithm that
+              is actually a group of interns that work on our basement. We have
+              a job for you, no matter your background or previous experience.
+              Is sending random memes through chat your only skill? That’s ok,
+              we got you, our Rock Star Meme Curator role is here for you.
+            </Text>
+            {/* <Stack direction={{ base: "column", md: "row" }} spacing={4}>
+              <Button
+                rounded={"full"}
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              >
+                Create Project
+              </Button>
+              <Button rounded={"full"}>How It Works</Button>
+            </Stack> */}
+          </Stack>
+        </Flex>
+        <Flex flex={1}>
+          <Image
+            alt={"Find job"}
+            objectFit={"cover"}
+            src={
+              "https://images.pexels.com/photos/5668857/pexels-photo-5668857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            }
+          />
+        </Flex>
+      </Stack>
+      {/* about team */}
+      <OurTeam />
     </>
   );
 }

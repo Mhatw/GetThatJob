@@ -5,7 +5,6 @@ import { Landing } from "./Landing";
 
 export function HomeView() {
   const outlet = useOutlet();
-  console.log(outlet);
   return (
     <>
       <Header />
