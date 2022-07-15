@@ -71,13 +71,9 @@ export default function OurTeam() {
       </Center>
       <SimpleGrid
         columns={{ base: 1, sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={10}
+        spacing={{ base: 0, sm: 1, md: 10, lg: 10, xl: 10 }}
         p={4}
       >
-        {/* <MemberCard />
-        <MemberCard />
-        <MemberCard />
-        <MemberCard /> */}
         {members.map((member) => (
           <MemberCard
             key={member.name}
