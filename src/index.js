@@ -4,16 +4,19 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AuthProvider } from "./services/auth";
+import { BrowserRouter } from "react-router-dom";
 // import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    <ChakraProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </ChakraProvider>
+    </BrowserRouter>
   </>
 );
 

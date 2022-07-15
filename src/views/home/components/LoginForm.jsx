@@ -8,9 +8,9 @@ import {
   InputRightElement,
   Stack,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
 
 function PasswordInput({ ...props }) {
@@ -36,15 +36,37 @@ function PasswordInput({ ...props }) {
 
 export function LoginForm() {
   const auth = useAuth();
-  const navigate = useNavigate();
+  const toast = useToast();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = (e) => {
-    auth.login(credentials);
-    navigate("/dashboard");
-  };
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    auth.setIsLoading(true);
+    try {
+      await auth.login(credentials);
+      toast({
+        title: "Success",
+        description: "You have successfully logged in",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        description: `${
+          error?.response?.data?.unauthorized || "something went wrong"
+        }`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+    auth.setIsLoading(false);
+  }
 
   const handleChange = (e) => {
     setCredentials({
@@ -60,7 +82,7 @@ export function LoginForm() {
       boxShadow={"lg"}
       p={8}
     >
-      <Stack spacing={4}>
+      <Stack as={"form"} spacing={4}>
         <FormControl id="email">
           <FormLabel>Email</FormLabel>
           <Input
@@ -93,8 +115,10 @@ export function LoginForm() {
               bg: "blue.500",
             }}
             onClick={handleLogin}
+            type="submit"
+            isLoading={auth.isLoading}
           >
-            Sign in
+            Login
           </Button>
         </Stack>
       </Stack>

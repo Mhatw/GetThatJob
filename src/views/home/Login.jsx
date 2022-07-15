@@ -14,6 +14,9 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 export function Login() {
   const theme = useTheme();
   const userType = useLocation().pathname.split("/")[2];
+
+  console.log(userType);
+
   console.log(userType);
 
   return (
