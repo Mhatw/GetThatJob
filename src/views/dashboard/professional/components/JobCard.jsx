@@ -16,7 +16,16 @@ import {
 import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BiTargetLock } from "react-icons/bi";
-export function JobCard() {
+export function JobCard({ job }) {
+  // funtion for transform money to abbreviated
+  const formatCash = (n) => {
+    if (n < 1e3) return n;
+    if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
+  };
+
+  const salary = `${formatCash(job.salary_min)} - ${formatCash(
+    job.salary_max
+  )}`;
   return (
     <Center
       transition="all 0.2s ease-in-out"
@@ -56,37 +65,44 @@ export function JobCard() {
             // pt={2}
           >
             <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
-              Marketing{" "}
+              {job.category}
               <Badge
                 borderRadius={"0.4rem"}
                 fontSize="0.5rem"
                 colorScheme="purple"
+                ml="0.5rem"
               >
                 New
               </Badge>
             </Text>
             <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
-              The job title
+              {job?.name}
             </Heading>
             <Text
-              color={useColorModeValue("gray.700", "gray.400")}
-              px={3}
-              m={"0rem"}
+              color={useColorModeValue("gray.500", "gray.400")}
+              mb={"0.4rem"}
+              fontSize={"sm"}
+              fontWeight={"bold"}
             >
-              The company name
+              {job?.company.name}
             </Text>
             <Stack align={"center"} justify={"center"} direction={"row"}>
-              <Tag size="md" key="md" variant="subtle" colorScheme="cyan">
+              <Tag size="md" key="typeTag" variant="subtle" colorScheme="blue">
                 <TagLeftIcon boxSize="12px" as={BsFillCalendarFill} />
                 <TagLabel ml={-1} fontSize="0.8rem">
                   Full-time
                 </TagLabel>
               </Tag>
 
-              <Tag size="md" key="md" variant="subtle" colorScheme="green">
+              <Tag
+                size="md"
+                key="salaryTag"
+                variant="subtle"
+                colorScheme="green"
+              >
                 <TagLeftIcon boxSize="12px" as={AiFillDollarCircle} />
                 <TagLabel ml={-1} fontSize="0.8rem">
-                  2.0k - 2.5k
+                  {salary}
                 </TagLabel>
               </Tag>
             </Stack>

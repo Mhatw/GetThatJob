@@ -1,4 +1,4 @@
-import { Button, useToast } from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, useToast } from "@chakra-ui/react";
 import React from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useAuth } from "../../services/auth";
@@ -38,16 +38,23 @@ export function DashboardView() {
   // };
   return (
     <>
-      <h1>DashboardView</h1>
-
-      <Button
-        colorScheme="red"
-        onClick={handleLogout}
-        type="submit"
-        isLoading={auth.isLoading}
+      <Flex
+        justifyContent="space-between"
+        px={"2rem"}
+        py={"1rem"}
+        background={"#f0f0f0"}
       >
-        Logout
-      </Button>
+        <Heading>Dashboard</Heading>
+        <Button
+          colorScheme="red"
+          onClick={handleLogout}
+          type="submit"
+          isLoading={auth.isLoading}
+        >
+          Logout
+        </Button>
+      </Flex>
+
       <Outlet />
     </>
   );

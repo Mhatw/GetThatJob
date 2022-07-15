@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 export function FindJob() {
   return (
     <>
-      <Heading>Find that job</Heading>
+      <Heading px={"2rem"}>Find that job</Heading>
 
       <Outlet />
     </>

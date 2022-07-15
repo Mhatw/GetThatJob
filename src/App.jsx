@@ -65,7 +65,14 @@ function App() {
         {/* professional routes */}
         <Route path="professional" element={<Professional />}>
           <Route path="find-job" element={<FindJob />}>
-            <Route path=":filter" element={<FilterJob />} />
+            <Route
+              path=":filter"
+              element={
+                <Suspense fallback={<h1>loading...</h1>}>
+                  <FilterJob />
+                </Suspense>
+              }
+            />
             <Route path="job/:id" element={<Job />} />
             <Route path="job-apply/:id" element={<JobApply />} />
             <Route path="company/:id" element={<Company />} />
