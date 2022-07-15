@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       console.log("user", user?.user_type);
       const route =
         user?.user_type === "Professional"
-          ? "/dashboard/professional"
+          ? "/dashboard/professional/find-job/all"
           : "/dashboard/recruiter";
       navigate(route);
     });

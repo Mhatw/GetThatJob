@@ -1,10 +1,12 @@
+import { Heading } from "@chakra-ui/react";
 import React from "react";
 import { Outlet } from "react-router";
 
 export function FindJob() {
   return (
     <>
-      <h1>Find Job</h1>
+      <Heading>Find that job</Heading>
+
       <Outlet />
     </>
   );
