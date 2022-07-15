@@ -143,19 +143,6 @@ export function Landing() {
               Is sending random memes through chat your only skill? That’s ok,
               we got you, our Rock Star Meme Curator role is here for you.
             </Text>
-            {/* <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-              <Button
-                rounded={"full"}
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Create Project
-              </Button>
-              <Button rounded={"full"}>How It Works</Button>
-            </Stack> */}
           </Stack>
         </Flex>
         <Flex flex={1}>
