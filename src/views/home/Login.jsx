@@ -44,17 +44,6 @@ export function Login() {
             <Flex w="100%" gap={2}>
               <NavLink
                 as={Link}
-                to="professional"
-                style={({ isActive }) =>
-                  isActive
-                    ? { borderBottom: `4px solid ${theme.colors.blue[400]}` }
-                    : { borderBottom: `4px solid ${theme.colors.gray[300]}` }
-                }
-              >
-                Professional
-              </NavLink>
-              <NavLink
-                as={Link}
                 to="recruiter"
                 style={({ isActive }) =>
                   isActive
@@ -67,6 +56,17 @@ export function Login() {
                 }
               >
                 Recruiter
+              </NavLink>
+              <NavLink
+                as={Link}
+                to="professional"
+                style={({ isActive }) =>
+                  isActive
+                    ? { borderBottom: `4px solid ${theme.colors.blue[400]}` }
+                    : { borderBottom: `4px solid ${theme.colors.gray[300]}` }
+                }
+              >
+                Professional
               </NavLink>
             </Flex>
           </Stack>

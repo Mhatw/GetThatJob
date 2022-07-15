@@ -1,6 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { tokenKey, BASE_URI } from "./sessions/config";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, logout } from "./sessions/session-services";
 
@@ -25,27 +23,7 @@ export const AuthProvider = ({ children }) => {
       navigate("/dashboard");
     });
   }
-  // const login = (credentials) => {
-  //   const options = {
-  //     method: "POST",
-  //     url: `${BASE_URI}/login`,
-  //     headers: { "Content-Type": "application/json" },
-  //     data: credentials,
-  //   };
-  //   axios
-  //     .request(options)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setUser(response.data);
-  //       sessionStorage.setItem(tokenKey, response.data.token);
-  //       return response.data;
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
 
-  // setUser(user);
   function handleLogout(credentials) {
     console.log("logout");
     return logout().then((user) => {
@@ -53,26 +31,6 @@ export const AuthProvider = ({ children }) => {
       navigate("/");
     });
   }
-  // const handleLogout = () => {
-  //   setUser(null);
-  //   logout()
-  // const options = {
-  //   method: "DELETE",
-  //   url: `${BASE_URI}/logout`,
-  //   headers: {
-  //     Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
-  //   },
-  // };
-  // axios
-  //   .request(options)
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     sessionStorage.removeItem(tokenKey);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // };
 
   return (
     <AuthContext.Provider
