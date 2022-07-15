@@ -18,9 +18,15 @@ export const AuthProvider = ({ children }) => {
 
   function handleLogin(credentials) {
     console.log("validating credentials");
+    console.log("user-pre", user);
     return login(credentials).then((user) => {
       setUser(user);
-      navigate("/dashboard");
+      console.log("user", user?.user_type);
+      const route =
+        user?.user_type === "Professional"
+          ? "/dashboard/professional"
+          : "/dashboard/recruiter";
+      navigate(route);
     });
   }
 
