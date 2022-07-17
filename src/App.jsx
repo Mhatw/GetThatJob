@@ -22,6 +22,7 @@ import {
 } from "./views/dashboard/recruiter";
 import { HomeView, Login, Signup } from "./views/home";
 import { LoginForm } from "./views/home/components";
+import { SignupForm } from "./views/home/components/SignupForms";
 
 function App() {
   return (
@@ -36,8 +37,8 @@ function App() {
           />
         </Route>
         <Route path="signup" element={<Signup />}>
-          <Route path="recruiter" element={<h1>recruiter</h1>} />
-          <Route path="professional" element={<h1>professional</h1>} />
+          <Route path="recruiter" element={<SignupForm />} />
+          <Route path="professional" element={<SignupForm />} />
         </Route>
       </Route>
       {/* dashboard */}

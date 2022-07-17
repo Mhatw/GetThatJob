@@ -71,15 +71,15 @@ export function LoginForm() {
             placeholder="some.user@mail.com"
           />
         </FormControl>
-        <FormControl id="password">
-          <FormLabel>Password</FormLabel>
-          <PasswordInput
-            placeholder="******"
-            value={credentials.password}
-            name="password"
-            onChange={(e) => handleChange(e)}
-          />
-        </FormControl>
+
+        <PasswordInput
+          placeholder="******"
+          value={credentials.password}
+          id={"password"}
+          name="password"
+          onChange={(e) => handleChange(e)}
+        />
+
         <Stack spacing={10}>
           <Stack
             direction={{ base: "column", sm: "row" }}
