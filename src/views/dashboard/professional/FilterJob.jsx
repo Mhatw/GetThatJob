@@ -1,9 +1,9 @@
-import { Button, Center, Flex, SimpleGrid } from "@chakra-ui/react";
+import { Center, Flex, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { indexCategories } from "../../../services/sessions/category-services";
-import { indexJobs } from "../../../services/sessions/jobs-services";
+import { indexReloadedJobs } from "../../../services/sessions/jobs-services";
 import { JobCard } from "./components";
 
 export function FilterJob() {
@@ -13,7 +13,7 @@ export function FilterJob() {
   const [cat, setCat] = useState([]);
   async function handleIndexJobs() {
     try {
-      await indexJobs().then((res) => {
+      await indexReloadedJobs().then((res) => {
         console.log(res, "jobs");
         setJobs(res);
       });

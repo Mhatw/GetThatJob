@@ -15,6 +15,21 @@ export async function indexJobs() {
 
   return response.data;
 }
+// reloaded_jobs
+export async function indexReloadedJobs() {
+  const options = {
+    method: "GET",
+    url: "https://get-that-jobs-api.herokuapp.com/reloaded_jobs",
+    headers: {
+      Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    },
+  };
+  const response = await axios.request(options);
+  console.log(response.data);
+  // const { token, ...user } = response.data;
+
+  return response.data;
+}
 
 // const options = {
 //   method: 'GET',
