@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NoRequireAuth } from "./services/NoRequireAuth";
 import { RequireAuth } from "./services/RequireAuth";
-import { DashboardView, EditProfile, Logout, Profile } from "./views/dashboard";
+import { DashboardView, EditProfile, Profile } from "./views/dashboard";
 import {
   Applies,
   Company,
@@ -94,7 +94,7 @@ function App() {
       </Route>
 
       {/* logout */}
-      <Route path="/logout" element={<Logout />} />
+      {/* <Route path="/logout" element={<Logout />} /> */}
     </Routes>
   );
 }
