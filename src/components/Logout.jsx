@@ -1,5 +1,6 @@
-import { Button, useToast } from "@chakra-ui/react";
+import { Button, Text, useToast } from "@chakra-ui/react";
 import React from "react";
+import { BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../services/auth";
 
@@ -35,11 +36,14 @@ export function Logout() {
     <Button
       colorScheme="red"
       onClick={handleLogout}
+      leftIcon={<BiLogOutCircle />}
       type="submit"
-      size={"sm"}
+      // size={"sm"}
+      w={"100%"}
+      borderRadius={"0"}
       isLoading={auth.isLoading}
     >
-      Logout
+      <Text display={["none", "none", "none", "block"]}>Logout</Text>
     </Button>
   );
 }

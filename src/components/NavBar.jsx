@@ -1,35 +1,48 @@
-import { Box, Button, Flex, Image, Spacer } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Hide,
+  Image,
+  Show,
+  Spacer,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../services/auth";
 import Logo from "../assets/logo.png";
+import Logo2 from "../assets/logo2.png";
 import { Logout } from "./Logout";
-
+import { AiOutlineSearch } from "react-icons/ai";
+import { BiListCheck, BiTargetLock, BiUser } from "react-icons/bi";
 const professionalNav = [
   {
     name: "Find Job",
     to: "/dashboard/professional/find-job",
-    icon: "search",
+    icon: <AiOutlineSearch />,
   },
   {
     name: "Your Applications",
     to: "/dashboard/professional/applies/all",
-    icon: "list",
+    icon: <BiListCheck />,
   },
   {
     name: "Following",
     to: "/dashboard/professional/following",
-    icon: "user",
+    icon: <BiTargetLock />,
   },
   {
     name: "Profile",
     to: "/dashboard/professional/profile",
-    icon: "user",
+    icon: <BiUser />,
   },
 ];
 
 export function NavBar() {
   const auth = useAuth();
+  const [isLargerThan992] = useMediaQuery("(min-width: 992px)");
   console.log(auth.user, "auth");
   return (
     <Flex
@@ -44,11 +57,15 @@ export function NavBar() {
       width="100%"
     >
       <Box as={Link} to="/" mb={"1rem"}>
-        <Image w="80px" src={Logo} alt="logo" />
+        {isLargerThan992 ? (
+          <Image w="80px" src={Logo} alt="logo" />
+        ) : (
+          <Image w="40px" src={Logo2} alt="logo" />
+        )}
       </Box>
 
       {professionalNav.map((nav) => (
-        <NavButton key={nav.name} to={nav.to}>
+        <NavButton key={nav.name} to={nav.to} icon={nav.icon}>
           {nav.name}
         </NavButton>
       ))}
@@ -58,20 +75,24 @@ export function NavBar() {
   );
 }
 
-function NavButton({ children, to }) {
+function NavButton({ children, to, icon }) {
   const location = useLocation();
   console.log(location, "location");
   const isActive = location.pathname.match(to);
   return (
     <Button
+      leftIcon={icon}
       as={NavLink}
       to={to}
       colorScheme={isActive ? "blue" : "gray"}
       variant={isActive ? "solid" : "ghost"}
       w="100%"
+      display={"flex"}
+      alignItems="center"
+      justifyContent={["center", "center", "center", "flex-start"]}
       borderRadius={"0"}
     >
-      {children}
+      <Text display={["none", "none", "none", "block"]}>{children}</Text>
     </Button>
   );
 }

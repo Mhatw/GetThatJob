@@ -17,11 +17,6 @@ code {
   height: 0;
 }
 
-*::-webkit-scrollbar {
-  width: 0.3125rem;
-  height: 0.3125rem;
-}
-
 *::-webkit-scrollbar-track {
   background-color: rgba(255, 255, 255, 0);
   border-radius: 0.625rem;

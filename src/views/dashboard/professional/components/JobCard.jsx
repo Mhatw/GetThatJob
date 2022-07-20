@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   Image,
+  Skeleton,
   Stack,
   Tag,
   TagLabel,
@@ -16,8 +17,10 @@ import {
 import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BiTargetLock } from "react-icons/bi";
+import { useAuth } from "../../../../services/auth";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
+  const auth = useAuth();
   const formatCash = (n) => {
     if (n < 1e3) return n;
     if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
@@ -40,115 +43,139 @@ export function JobCard({ job }) {
     job.salary_max
   )}`;
   return (
-    <Center
-      transition="all 0.2s ease-in-out"
-      _hover={{
-        transform: "scale(1.05)",
-      }}
-    >
-      <Stack
-        borderWidth="1px"
-        borderRadius="lg"
-        // borderColor="red.500"
-        // w={{ sm: "100%", md: "540px" }}
-        // height={{ sm: "476px", md: "20rem" }}
-        direction={"column"}
-        bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"2xl"}
-        padding={4}
+    <Skeleton borderRadius={"lg"} isLoaded={!auth.isLoading} fadeDuration={2}>
+      <Center
+        transition="all 0.2s ease-in-out"
+        _hover={{
+          transform: "scale(1.05)",
+        }}
       >
-        <Flex gap={"0.5rem"}>
-          <Flex flex={1} bg="blue.200">
-            <Image
-              objectFit="cover"
-              w={"110px"}
-              h={"110px"}
-              src={job.logo_url || temp_img}
-            />
-          </Flex>
-          <Box
-            flexDirection="column"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            // border={"1px"}
-
-            // p={1}
-            // pt={2}
-          >
-            <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
-              {job.category}
-              <Badge
-                borderRadius={"0.4rem"}
-                fontSize="0.5rem"
-                colorScheme="purple"
-                ml="0.5rem"
-              >
-                New
-              </Badge>
-            </Text>
-            <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
-              {job?.name}
-            </Heading>
-            <Text
-              color={useColorModeValue("gray.500", "gray.400")}
-              mb={"0.4rem"}
-              fontSize={"sm"}
-              fontWeight={"bold"}
-            >
-              {job?.company.name}
-            </Text>
-            <Stack align={"center"} justify={"center"} direction={"row"}>
-              <Tag size="md" key="typeTag" variant="subtle" colorScheme="blue">
-                <TagLeftIcon boxSize="12px" as={BsFillCalendarFill} />
-                <TagLabel ml={-1} fontSize="0.8rem">
-                  Full-time
-                </TagLabel>
-              </Tag>
-
-              <Tag
-                size="md"
-                key="salaryTag"
-                variant="subtle"
-                colorScheme="green"
-              >
-                <TagLeftIcon boxSize="12px" as={AiFillDollarCircle} />
-                <TagLabel ml={-1} fontSize="0.8rem">
-                  {salary}
-                </TagLabel>
-              </Tag>
-            </Stack>
-          </Box>
-        </Flex>
         <Stack
-          width={"100%"}
-          mt={"2rem"}
-          direction={"row"}
-          padding={2}
-          justifyContent={"space-between"}
-          alignItems={"center"}
+          borderWidth="1px"
+          borderRadius="lg"
+          // borderColor="red.500"
+          // w={{ sm: "100%", md: "540px" }}
+          // height={{ sm: "476px", md: "20rem" }}
+          direction={"column"}
+          bg={useColorModeValue("white", "gray.900")}
+          boxShadow={"xl"}
+          padding={4}
         >
-          <Button fontSize={"sm"} leftIcon={<BiTargetLock />}>
-            follow
-          </Button>
-          <Button
-            flex={1}
-            fontSize={"sm"}
-            bg={"blue.400"}
-            color={"white"}
-            boxShadow={
-              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-            }
-            _hover={{
-              bg: "blue.500",
-            }}
-            _focus={{
-              bg: "blue.500",
-            }}
+          <Flex gap={"0.5rem"} direction={["column", "row", "row", "row"]}>
+            <Flex flex={1}>
+              <Image
+                objectFit="cover"
+                maxW="130px"
+                bg="gray.500"
+                // maxH="130px"
+                w={["60px", "130px", "130px"]}
+                h={["60px", "130px", "130px"]}
+                borderRadius="lg"
+                src={job.logo_url || temp_img}
+              />
+            </Flex>
+            <Box
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              // border={"1px"}
+
+              // p={1}
+              // pt={2}
+            >
+              <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
+                {job.category}
+                <Badge
+                  borderRadius={"0.4rem"}
+                  fontSize="0.5rem"
+                  colorScheme="purple"
+                  ml="0.5rem"
+                >
+                  New
+                </Badge>
+              </Text>
+              <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
+                {job?.name}
+              </Heading>
+              <Text
+                color={useColorModeValue("gray.500", "gray.400")}
+                mb={"0.4rem"}
+                fontSize={"sm"}
+                fontWeight={"bold"}
+                // wordBreak={"break-word"}
+                // whiteSpace={"pre-wrap"}
+                overflow={"hidden"}
+                w="200px"
+                h="40px"
+              >
+                {job?.company.name}
+              </Text>
+              <Stack
+                allignItems={["flex-start", "center", "center", "center"]}
+                justifyContent={["center", "center", "center", "center"]}
+                direction={["column", "row", "row", "row"]}
+              >
+                <Tag
+                  size="md"
+                  key="typeTag"
+                  variant="subtle"
+                  colorScheme="blue"
+                >
+                  <TagLeftIcon boxSize="12px" as={BsFillCalendarFill} />
+                  <TagLabel ml={-1} fontSize="0.8rem">
+                    Full-time
+                  </TagLabel>
+                </Tag>
+
+                <Tag
+                  size="md"
+                  key="salaryTag"
+                  variant="subtle"
+                  colorScheme="green"
+                >
+                  <TagLeftIcon boxSize="12px" as={AiFillDollarCircle} />
+                  <TagLabel ml={-1} fontSize="0.8rem">
+                    {salary}
+                  </TagLabel>
+                </Tag>
+              </Stack>
+            </Box>
+          </Flex>
+          <Stack
+            width={"100%"}
+            mt={"2rem"}
+            direction={["row", "row", "row"]}
+            padding={2}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            See more
-          </Button>
+            <Button
+              fontSize={"sm"}
+              leftIcon={<BiTargetLock />}
+              // width={["100%", ""]}
+            >
+              follow
+            </Button>
+            <Button
+              flex={[null, 1]}
+              fontSize={"sm"}
+              bg={"blue.400"}
+              color={"white"}
+              boxShadow={
+                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+              }
+              _hover={{
+                bg: "blue.500",
+              }}
+              _focus={{
+                bg: "blue.500",
+              }}
+            >
+              See more
+            </Button>
+          </Stack>
         </Stack>
-      </Stack>
-    </Center>
+      </Center>
+    </Skeleton>
   );
 }

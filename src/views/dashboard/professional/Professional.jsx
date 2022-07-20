@@ -27,7 +27,8 @@ export function Professional() {
       <GridItem
         bg="gray.50"
         area={"main"}
-        p={["1rem", "1rem", "3rem"]}
+        p={["0rem", "1rem", "3rem"]}
+        pt="2rem"
         overflow="scroll"
       >
         <Outlet />
