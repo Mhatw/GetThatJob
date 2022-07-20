@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { NoRequireAuth } from "./services/NoRequireAuth";
 import { RequireAuth } from "./services/RequireAuth";
-import { DashboardView, EditProfile, Logout, Profile } from "./views/dashboard";
+import { DashboardView, EditProfile, Profile } from "./views/dashboard";
 import {
   Applies,
   Company,
@@ -28,7 +29,14 @@ function App() {
   return (
     <Routes>
       {/* home */}
-      <Route path="/" element={<HomeView />}>
+      <Route
+        path="/"
+        element={
+          <NoRequireAuth>
+            <HomeView />
+          </NoRequireAuth>
+        }
+      >
         <Route path="login" element={<Login />}>
           <Route path="recruiter" element={<LoginForm user="recruiter" />} />
           <Route
@@ -86,7 +94,7 @@ function App() {
       </Route>
 
       {/* logout */}
-      <Route path="/logout" element={<Logout />} />
+      {/* <Route path="/logout" element={<Logout />} /> */}
     </Routes>
   );
 }

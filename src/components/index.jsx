@@ -1,3 +1,5 @@
 import { ReadMore } from "./ReadMore";
+import { Logout } from "./Logout";
+import { NavBar } from "./NavBar";
 
-export { ReadMore };
+export { ReadMore, Logout, NavBar };
