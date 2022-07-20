@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }) => {
         console.log(error);
         setUser(null);
         setIsLoadingView(false);
-        console.log(user);
       });
 
     console.log("useEffect");
