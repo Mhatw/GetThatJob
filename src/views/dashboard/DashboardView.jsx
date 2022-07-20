@@ -38,7 +38,7 @@ export function DashboardView() {
   // };
   return (
     <>
-      <Flex
+      {/* <Flex
         justifyContent="space-between"
         px={"2rem"}
         py={"1rem"}
@@ -46,7 +46,7 @@ export function DashboardView() {
       >
         <Heading>Dashboard</Heading>
         <Logout />
-      </Flex>
+      </Flex> */}
 
       <Outlet />
     </>
