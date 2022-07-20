@@ -20,14 +20,13 @@ export function DashboardView() {
       });
     } catch (error) {
       toast({
-        title: "Login failed",
-        description: `${
-          error?.response?.data?.unauthorized || "something went wrong"
-        }`,
+        title: "Logout failed",
+        description: "something went wrong",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
+      auth.setUser(null);
       navigate("/");
     }
     auth.setIsLoading(false);

@@ -59,7 +59,12 @@ export function JobCard({ job }) {
       >
         <Flex gap={"0.5rem"}>
           <Flex flex={1} bg="blue.200">
-            <Image objectFit="cover" w={"110px"} h={"110px"} src={temp_img} />
+            <Image
+              objectFit="cover"
+              w={"110px"}
+              h={"110px"}
+              src={job.logo_url || temp_img}
+            />
           </Flex>
           <Box
             flexDirection="column"

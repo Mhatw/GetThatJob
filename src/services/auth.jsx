@@ -8,7 +8,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingView, setIsLoadingView] = useState(false);
+  const [isLoadingView, setIsLoadingView] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         login: handleLogin,
         logout: handleLogout,
         isLoading,
