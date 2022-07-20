@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 export function Professional() {
   return (
-    <>
+    <Flex>
       <Flex
         alignItems="center"
+        flexDirection={"row"}
         gap={"1rem"}
         justifyContent="flex-start"
         background={"#f5f5f5"}
-        b
         px={"2rem"}
         py={"1rem"}
       >
@@ -29,6 +29,6 @@ export function Professional() {
       <br />
       <Link to="profile">profile</Link> */}
       <Outlet />
-    </>
+    </Flex>
   );
 }

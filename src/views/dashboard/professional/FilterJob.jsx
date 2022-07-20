@@ -46,7 +46,6 @@ export function FilterJob() {
         alignItems="center"
         gap={"1rem"}
         justifyContent="flex-start"
-        b
         px={"2rem"}
         py={"1rem"}
       >
@@ -59,6 +58,7 @@ export function FilterJob() {
           // px={"4rem"}
           gap="1.5rem"
           maxW={"96em"}
+          overflowX={"scroll"}
         >
           {jobs.map((job) => (
             <JobCard key={job.id} job={job} />

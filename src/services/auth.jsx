@@ -1,20 +1,32 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, logout } from "./sessions/session-services";
+import { getUser } from "./sessions/user-services";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingView, setIsLoadingView] = useState(false);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   // getUser()
-  //   //   .then(setUser)
-  //   //   .catch((error) => console.log(error));
-  //   console.log("useEffect");
-  // }, []);
+  useEffect(() => {
+    setIsLoadingView(true);
+    getUser()
+      .then((res) => {
+        setUser(res);
+        setIsLoadingView(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setUser(null);
+        setIsLoadingView(false);
+        console.log(user);
+      });
+
+    console.log("useEffect");
+  }, []);
 
   function handleLogin(credentials) {
     console.log("validating credentials");
@@ -46,6 +58,8 @@ export const AuthProvider = ({ children }) => {
         logout: handleLogout,
         isLoading,
         setIsLoading,
+        isLoadingView,
+        setIsLoadingView,
       }}
     >
       {children}
