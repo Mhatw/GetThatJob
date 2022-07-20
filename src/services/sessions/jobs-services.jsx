@@ -10,7 +10,6 @@ export async function indexJobs() {
     },
   };
   const response = await axios.request(options);
-  console.log(response.data);
   // const { token, ...user } = response.data;
 
   return response.data;
@@ -25,7 +24,6 @@ export async function indexReloadedJobs() {
     },
   };
   const response = await axios.request(options);
-  console.log(response.data);
   // const { token, ...user } = response.data;
 
   return response.data;

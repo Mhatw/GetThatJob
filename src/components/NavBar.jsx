@@ -2,10 +2,7 @@ import {
   Box,
   Button,
   Flex,
-  Hide,
   Image,
-  Show,
-  Spacer,
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -43,7 +40,6 @@ const professionalNav = [
 export function NavBar() {
   const auth = useAuth();
   const [isLargerThan992] = useMediaQuery("(min-width: 992px)");
-  console.log(auth.user, "auth");
   return (
     <Flex
       alignItems="center"
@@ -51,6 +47,7 @@ export function NavBar() {
       gap={"1rem"}
       justifyContent="flex-start"
       // px={"2rem"}
+
       py={"2rem"}
       // border="2px"
       height="100%"
@@ -69,7 +66,7 @@ export function NavBar() {
           {nav.name}
         </NavButton>
       ))}
-      <Spacer />
+
       <Logout />
     </Flex>
   );
@@ -77,7 +74,6 @@ export function NavBar() {
 
 function NavButton({ children, to, icon }) {
   const location = useLocation();
-  console.log(location, "location");
   const isActive = location.pathname.match(to);
   return (
     <Button

@@ -10,7 +10,6 @@ export async function getUser() {
     },
   };
   const response = await axios.request(options);
-  console.log(response);
   const { ...user } = response.data;
   // sessionStorage.setItem(tokenKey, token);
   return user;

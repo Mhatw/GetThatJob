@@ -30,6 +30,7 @@ export function Professional() {
         p={["0rem", "1rem", "3rem"]}
         pt="2rem"
         overflow="scroll"
+        className="withScrollbar"
       >
         <Outlet />
       </GridItem>

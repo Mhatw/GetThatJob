@@ -111,7 +111,6 @@ export function JobCard({ job }) {
                 {job?.company.name}
               </Text>
               <Stack
-                allignItems={["flex-start", "center", "center", "center"]}
                 justifyContent={["center", "center", "center", "center"]}
                 direction={["column", "row", "row", "row"]}
               >

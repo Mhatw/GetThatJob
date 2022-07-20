@@ -7,45 +7,45 @@ import { indexReloadedJobs } from "../../../services/sessions/jobs-services";
 import { JobCard } from "./components";
 import { useSingleEffect } from "react-haiku";
 import { useAuth } from "../../../services/auth";
+import { useData } from "../../../context/dataContext";
 export function FilterJob() {
   const params = useParams();
-  console.log(params);
-  const [jobs, setJobs] = useState([]);
-  const [cat, setCat] = useState([]);
-  const auth = useAuth();
-  async function handleIndexJobs() {
-    auth.setIsLoading(true);
-    try {
-      await indexReloadedJobs().then((res) => {
-        console.log(res, "jobs");
-        setJobs(res);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function handleIndexCat() {
-    try {
-      await indexCategories().then((res) => {
-        console.log(res, "cats");
-        setCat(res);
-        jobs?.forEach((job) => {
-          job["category"] = cat.find((cat) => cat.id === job.category_id).name;
-        });
-        setTimeout(() => {
-          auth.setIsLoading(false);
-        }, 500);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useSingleEffect(() => {
-    handleIndexJobs();
-    handleIndexCat();
-  });
+  // const [jobs, setJobs] = useState([]);
+  // const [cat, setCat] = useState([]);
+  // const auth = useAuth();
+  const data = useData();
+  // async function handleIndexJobs() {
+  //   auth.setIsLoading(true);
+  //   try {
+  //     await indexReloadedJobs().then((res) => {
+  //       console.log(res, "jobs");
+  //       setJobs(res);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // async function handleIndexCat() {
+  //   try {
+  //     await indexCategories().then((res) => {
+  //       console.log(res, "cats");
+  //       setCat(res);
+  //       jobs?.forEach((job) => {
+  //         job["category"] = cat.find((cat) => cat.id === job.category_id).name;
+  //       });
+  //       setTimeout(() => {
+  //         auth.setIsLoading(false);
+  //       }, 500);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // useSingleEffect(() => {
+  //   handleIndexJobs();
+  //   handleIndexCat();
+  // });
 
-  console.log(jobs, "neee");
   return (
     <>
       <Flex
@@ -66,7 +66,7 @@ export function FilterJob() {
           maxW={"96em"}
           overflowX={"scroll"}
         >
-          {jobs.map((job) => (
+          {data?.jobs.map((job) => (
             <JobCard key={job.id} job={job} />
           ))}
         </SimpleGrid>
