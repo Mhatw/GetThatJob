@@ -39,14 +39,14 @@ export function NavBar() {
       justifyContent="flex-start"
       // px={"2rem"}
       py={"2rem"}
-      border="2px"
+      // border="2px"
       height="100%"
+      width="100%"
     >
-      <Link to="/">
-        <Box p="2">
-          <Image w="80px" src={Logo} alt="logo" />
-        </Box>
-      </Link>
+      <Box as={Link} to="/" mb={"1rem"}>
+        <Image w="80px" src={Logo} alt="logo" />
+      </Box>
+
       {professionalNav.map((nav) => (
         <NavButton key={nav.name} to={nav.to}>
           {nav.name}
