@@ -1,11 +1,11 @@
 import { Center, Flex, SimpleGrid } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { indexCategories } from "../../../services/sessions/category-services";
 import { indexReloadedJobs } from "../../../services/sessions/jobs-services";
 import { JobCard } from "./components";
-
+import { useSingleEffect } from "react-haiku";
 export function FilterJob() {
   const params = useParams();
   console.log(params);
@@ -34,10 +34,10 @@ export function FilterJob() {
       console.log(error);
     }
   }
-  useEffect(() => {
+  useSingleEffect(() => {
     handleIndexJobs();
     handleIndexCat();
-  }, []);
+  });
 
   console.log(jobs, "neee");
   return (

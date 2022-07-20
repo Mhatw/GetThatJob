@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, logout } from "./sessions/session-services";
 import { getUser } from "./sessions/user-services";
-
+import { useSingleEffect } from "react-haiku";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoadingView, setIsLoadingView] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useSingleEffect(() => {
     setIsLoadingView(true);
     getUser()
       .then((res) => {
@@ -23,9 +23,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setIsLoadingView(false);
       });
-
-    console.log("useEffect");
-  }, []);
+  });
 
   function handleLogin(credentials) {
     console.log("validating credentials");
