@@ -1,12 +1,9 @@
 import { Center, Flex, SimpleGrid } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { indexCategories } from "../../../services/sessions/category-services";
-import { indexReloadedJobs } from "../../../services/sessions/jobs-services";
 import { JobCard } from "./components";
-import { useSingleEffect } from "react-haiku";
-import { useAuth } from "../../../services/auth";
+
 import { useData } from "../../../context/dataContext";
 export function FilterJob() {
   const params = useParams();

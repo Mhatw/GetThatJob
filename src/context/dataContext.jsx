@@ -3,6 +3,7 @@ import { indexCategories } from "../services/sessions/category-services";
 import { indexReloadedJobs } from "../services/sessions/jobs-services";
 import { useSingleEffect } from "react-haiku";
 import { useAuth } from "../services/auth";
+import { indexTypes } from "../services/sessions/types-services";
 const DataContext = createContext(null);
 export const DataProvider = ({ children }) => {
   const [cat, setCat] = useState([]);
@@ -37,9 +38,20 @@ export const DataProvider = ({ children }) => {
       console.log(error);
     }
   }
+  async function handleIndexTypes() {
+    try {
+      await indexTypes().then((res) => {
+        console.log(res, "types");
+        setTypes(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useSingleEffect(() => {
     handleIndexJobs();
     handleIndexCat();
+    handleIndexTypes();
   });
   return (
     <DataContext.Provider

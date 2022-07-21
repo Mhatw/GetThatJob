@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "../services/auth";
 import Logo from "../assets/logo.png";
 import Logo2 from "../assets/logo2.png";
 import { Logout } from "./Logout";
@@ -38,7 +37,6 @@ const professionalNav = [
 ];
 
 export function NavBar() {
-  const auth = useAuth();
   const [isLargerThan992] = useMediaQuery("(min-width: 992px)");
   return (
     <Flex
