@@ -54,15 +54,17 @@ export function JobCard({ job }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          // borderColor="red.500"
-          // w={{ sm: "100%", md: "540px" }}
-          // height={{ sm: "476px", md: "20rem" }}
           direction={"column"}
           bg={useColorModeValue("white", "gray.900")}
           boxShadow={"xl"}
           padding={4}
         >
-          <Flex gap={"0.5rem"} direction={["column", "row", "row", "row"]}>
+          <Flex
+            as={Link}
+            to={`/dashboard/professional/find-job/job/${job.id}`}
+            gap={"0.5rem"}
+            direction={["column", "row", "row", "row"]}
+          >
             <Flex flex={1}>
               <Image
                 objectFit="cover"
@@ -141,6 +143,7 @@ export function JobCard({ job }) {
               </Stack>
             </Box>
           </Flex>
+          {/* buttons */}
           <Stack
             width={"100%"}
             mt={"2rem"}
