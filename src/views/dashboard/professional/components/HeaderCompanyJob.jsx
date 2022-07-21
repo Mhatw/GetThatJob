@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, theme } from "@chakra-ui/react";
 import React from "react";
 import { BiTargetLock } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -31,7 +31,12 @@ export function HeaderCompanyJob({ job, isLink }) {
           fontSize={"2xl"}
           fontFamily={"body"}
           m={"0"}
-          w="100%"
+          // w="100%"
+          transition={"all 0.1s ease-in"}
+          _hover={{
+            textDecoration: isLink ? "underline" : "none",
+            color: isLink ? "blue.600" : "",
+          }}
         >
           {job?.company.name}
         </Heading>
