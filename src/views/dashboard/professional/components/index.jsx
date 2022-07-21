@@ -4,7 +4,7 @@ import { DescriptionJob } from "./DescriptionJob";
 import { ApplyButton } from "./ApplyButton";
 import { TitleJob } from "./TitleJob";
 import { HeaderCompanyJob } from "./HeaderCompanyJob";
-
+import { ApplyCard } from "./ApplyCard";
 export {
   JobCard,
   TagBoxJob,
@@ -12,4 +12,5 @@ export {
   ApplyButton,
   TitleJob,
   HeaderCompanyJob,
+  ApplyCard,
 };

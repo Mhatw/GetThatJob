@@ -1,17 +1,18 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 
-export function DescriptionJob({ job }) {
-  const data = [
-    {
-      title: `About ${job?.company.name}`,
-      content: job?.company.description,
-    },
-    {
-      title: "About the job position",
-      content: job?.description,
-    },
-  ];
+export function DescriptionJob({ job, data }) {
+  if (!data)
+    data = [
+      {
+        title: `About ${job?.company.name}`,
+        content: job?.company.description,
+      },
+      {
+        title: "About the job position",
+        content: job?.description,
+      },
+    ];
   return (
     <>
       {data.map((item, index) => (
