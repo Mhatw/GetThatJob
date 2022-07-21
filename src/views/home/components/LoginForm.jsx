@@ -14,6 +14,7 @@ import { PasswordInput } from "./PasswordInput";
 
 export function LoginForm() {
   const auth = useAuth();
+
   const toast = useToast();
   const [credentials, setCredentials] = useState({
     email: "",

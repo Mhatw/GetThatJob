@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   useSingleEffect(() => {
     setIsLoadingView(true);
+    setIsLoading(false);
     getUser()
       .then((res) => {
         setUser(res);

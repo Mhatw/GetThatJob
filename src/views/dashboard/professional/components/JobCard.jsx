@@ -18,6 +18,7 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
+import { Link } from "react-router-dom";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
   const auth = useAuth();
@@ -156,6 +157,8 @@ export function JobCard({ job }) {
               follow
             </Button>
             <Button
+              as={Link}
+              to={`/dashboard/professional/find-job/job/${job.id}`}
               flex={[null, 1]}
               fontSize={"sm"}
               bg={"blue.400"}
