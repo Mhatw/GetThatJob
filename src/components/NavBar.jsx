@@ -16,7 +16,7 @@ import { BiListCheck, BiTargetLock, BiUser } from "react-icons/bi";
 const professionalNav = [
   {
     name: "Find Job",
-    to: "/dashboard/professional/find-job",
+    to: "/dashboard/professional/find-job/all",
     icon: <AiOutlineSearch />,
   },
   {
