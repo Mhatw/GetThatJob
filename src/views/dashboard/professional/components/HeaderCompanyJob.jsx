@@ -26,7 +26,7 @@ export function HeaderCompanyJob({ job, isLink }) {
       >
         <Heading
           as={isLink ? Link : ""}
-          to={`../company/${job?.company.id}`}
+          to={`../company/${job?.id}`}
           color="gray.900"
           fontSize={"2xl"}
           fontFamily={"body"}
