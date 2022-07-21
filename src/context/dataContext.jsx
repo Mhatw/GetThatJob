@@ -36,6 +36,10 @@ export const DataProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error);
+      if (error?.response?.data?.unauthorized) {
+        auth.setIsLoading(false);
+        auth.setUser(null);
+      }
     }
   }
   async function handleIndexTypes() {
