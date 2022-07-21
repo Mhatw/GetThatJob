@@ -1,10 +1,10 @@
 import axios from "axios";
-import { tokenKey } from "./config";
+import { BASE_URI, tokenKey } from "./config";
 
 export async function indexJobs() {
   const options = {
     method: "GET",
-    url: "https://get-that-jobs-api.herokuapp.com/jobs",
+    url: `${BASE_URI}/jobs`,
     headers: {
       Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
     },
@@ -18,7 +18,7 @@ export async function indexJobs() {
 export async function indexReloadedJobs() {
   const options = {
     method: "GET",
-    url: "https://get-that-jobs-api.herokuapp.com/reloaded_jobs",
+    url: `${BASE_URI}/reloaded_jobs`,
     headers: {
       Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
     },
