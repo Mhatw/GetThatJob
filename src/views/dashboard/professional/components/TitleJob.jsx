@@ -3,8 +3,7 @@ import React from "react";
 import { TagBoxJob } from "./TagsBoxJob";
 
 export function TitleJob({ job }) {
-  const posted =
-    (new Date() - new Date(job?.company.created_at)) / (1000 * 60 * 60);
+  const posted = (new Date() - new Date(job?.created_at)) / (1000 * 60 * 60);
   return (
     <Center flexDirection={"column"}>
       <Heading fontSize={"4xl"} fontFamily={"body"} m={"0"} color="gray.900">
