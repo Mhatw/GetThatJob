@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { DataProvider } from "./context/dataContext";
 import { NoRequireAuth } from "./services/NoRequireAuth";
 import { RequireAuth } from "./services/RequireAuth";
 import { DashboardView, EditProfile, Profile } from "./views/dashboard";
@@ -55,9 +56,11 @@ function App() {
         path="/dashboard"
         element={
           <Suspense fallback={<h1>loading...</h1>}>
-            <RequireAuth>
-              <DashboardView />
-            </RequireAuth>
+            <DataProvider>
+              <RequireAuth>
+                <DashboardView />
+              </RequireAuth>
+            </DataProvider>
           </Suspense>
         }
       >
@@ -92,9 +95,6 @@ function App() {
           <Route path="edit-profile" element={<EditProfile />} />
         </Route>
       </Route>
-
-      {/* logout */}
-      {/* <Route path="/logout" element={<Logout />} /> */}
     </Routes>
   );
 }

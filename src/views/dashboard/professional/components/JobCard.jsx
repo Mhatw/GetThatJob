@@ -18,13 +18,11 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
+import { Link } from "react-router-dom";
+import { salaryString } from "../utilities";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
   const auth = useAuth();
-  const formatCash = (n) => {
-    if (n < 1e3) return n;
-    if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
-  };
   // function for random element in array
   const randomElement = (array) => {
     return array[Math.floor(Math.random() * array.length)];
@@ -39,9 +37,7 @@ export function JobCard({ job }) {
     "https://i.ytimg.com/vi/Ew0cCLyGsgQ/maxresdefault.jpg",
   ]);
 
-  const salary = `${formatCash(job.salary_min)} - ${formatCash(
-    job.salary_max
-  )}`;
+  const salary = salaryString(job.salary_min, job.salary_max);
   return (
     <Skeleton borderRadius={"lg"} isLoaded={!auth.isLoading} fadeDuration={2}>
       <Center
@@ -53,21 +49,22 @@ export function JobCard({ job }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          // borderColor="red.500"
-          // w={{ sm: "100%", md: "540px" }}
-          // height={{ sm: "476px", md: "20rem" }}
           direction={"column"}
           bg={useColorModeValue("white", "gray.900")}
           boxShadow={"xl"}
           padding={4}
         >
-          <Flex gap={"0.5rem"} direction={["column", "row", "row", "row"]}>
+          <Flex
+            as={Link}
+            to={`/dashboard/professional/find-job/job/${job.id}`}
+            gap={"0.5rem"}
+            direction={["column", "row", "row", "row"]}
+          >
             <Flex flex={1}>
               <Image
                 objectFit="cover"
                 maxW="130px"
                 bg="gray.500"
-                // maxH="130px"
                 w={["60px", "130px", "130px"]}
                 h={["60px", "130px", "130px"]}
                 borderRadius="lg"
@@ -78,10 +75,6 @@ export function JobCard({ job }) {
               flexDirection="column"
               justifyContent="flex-start"
               alignItems="flex-start"
-              // border={"1px"}
-
-              // p={1}
-              // pt={2}
             >
               <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
                 {job.category}
@@ -102,8 +95,6 @@ export function JobCard({ job }) {
                 mb={"0.4rem"}
                 fontSize={"sm"}
                 fontWeight={"bold"}
-                // wordBreak={"break-word"}
-                // whiteSpace={"pre-wrap"}
                 overflow={"hidden"}
                 w="200px"
                 h="40px"
@@ -111,7 +102,6 @@ export function JobCard({ job }) {
                 {job?.company.name}
               </Text>
               <Stack
-                allignItems={["flex-start", "center", "center", "center"]}
                 justifyContent={["center", "center", "center", "center"]}
                 direction={["column", "row", "row", "row"]}
               >
@@ -141,6 +131,7 @@ export function JobCard({ job }) {
               </Stack>
             </Box>
           </Flex>
+          {/* buttons */}
           <Stack
             width={"100%"}
             mt={"2rem"}
@@ -149,14 +140,12 @@ export function JobCard({ job }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Button
-              fontSize={"sm"}
-              leftIcon={<BiTargetLock />}
-              // width={["100%", ""]}
-            >
+            <Button fontSize={"sm"} leftIcon={<BiTargetLock />}>
               follow
             </Button>
             <Button
+              as={Link}
+              to={`/dashboard/professional/find-job/job/${job.id}`}
               flex={[null, 1]}
               fontSize={"sm"}
               bg={"blue.400"}

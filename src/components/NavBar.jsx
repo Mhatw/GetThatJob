@@ -2,16 +2,12 @@ import {
   Box,
   Button,
   Flex,
-  Hide,
   Image,
-  Show,
-  Spacer,
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "../services/auth";
 import Logo from "../assets/logo.png";
 import Logo2 from "../assets/logo2.png";
 import { Logout } from "./Logout";
@@ -20,7 +16,7 @@ import { BiListCheck, BiTargetLock, BiUser } from "react-icons/bi";
 const professionalNav = [
   {
     name: "Find Job",
-    to: "/dashboard/professional/find-job",
+    to: "/dashboard/professional/find-job/all",
     icon: <AiOutlineSearch />,
   },
   {
@@ -41,9 +37,7 @@ const professionalNav = [
 ];
 
 export function NavBar() {
-  const auth = useAuth();
   const [isLargerThan992] = useMediaQuery("(min-width: 992px)");
-  console.log(auth.user, "auth");
   return (
     <Flex
       alignItems="center"
@@ -51,6 +45,7 @@ export function NavBar() {
       gap={"1rem"}
       justifyContent="flex-start"
       // px={"2rem"}
+
       py={"2rem"}
       // border="2px"
       height="100%"
@@ -69,7 +64,7 @@ export function NavBar() {
           {nav.name}
         </NavButton>
       ))}
-      <Spacer />
+
       <Logout />
     </Flex>
   );
@@ -77,7 +72,6 @@ export function NavBar() {
 
 function NavButton({ children, to, icon }) {
   const location = useLocation();
-  console.log(location, "location");
   const isActive = location.pathname.match(to);
   return (
     <Button
