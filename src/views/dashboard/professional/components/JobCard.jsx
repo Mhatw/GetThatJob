@@ -16,10 +16,10 @@ import {
 } from "@chakra-ui/react";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
-import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import { Link } from "react-router-dom";
 import { salaryString } from "../utilities";
+import { FollowButton } from "./FollowButton";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
   const auth = useAuth();
@@ -38,6 +38,7 @@ export function JobCard({ job }) {
   ]);
 
   const salary = salaryString(job.salary_min, job.salary_max);
+  const posted = (new Date() - new Date(job.created_at)) / (1000 * 60);
   return (
     <Skeleton borderRadius={"lg"} isLoaded={!auth.isLoading} fadeDuration={2}>
       <Center
@@ -64,7 +65,7 @@ export function JobCard({ job }) {
               <Image
                 objectFit="cover"
                 maxW="130px"
-                bg="gray.500"
+                bg="gray.100"
                 w={["60px", "130px", "130px"]}
                 h={["60px", "130px", "130px"]}
                 borderRadius="lg"
@@ -78,14 +79,16 @@ export function JobCard({ job }) {
             >
               <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
                 {job.category}
-                <Badge
-                  borderRadius={"0.4rem"}
-                  fontSize="0.5rem"
-                  colorScheme="purple"
-                  ml="0.5rem"
-                >
-                  New
-                </Badge>
+                {posted < 240 && (
+                  <Badge
+                    borderRadius={"0.4rem"}
+                    fontSize="0.5rem"
+                    colorScheme="purple"
+                    ml="0.5rem"
+                  >
+                    New
+                  </Badge>
+                )}
               </Text>
               <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
                 {job?.name}
@@ -113,7 +116,7 @@ export function JobCard({ job }) {
                 >
                   <TagLeftIcon boxSize="12px" as={BsFillCalendarFill} />
                   <TagLabel ml={-1} fontSize="0.8rem">
-                    Full-time
+                    {job?.type}
                   </TagLabel>
                 </Tag>
 
@@ -140,9 +143,7 @@ export function JobCard({ job }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Button fontSize={"sm"} leftIcon={<BiTargetLock />}>
-              follow
-            </Button>
+            <FollowButton job={job} />
             <Button
               as={Link}
               to={`/dashboard/professional/find-job/job/${job.id}`}

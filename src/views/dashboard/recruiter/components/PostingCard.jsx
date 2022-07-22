@@ -5,6 +5,8 @@ import {
   AccordionPanel,
   Badge,
   Box,
+  Button,
+  Center,
   Flex,
   Heading,
   Image,
@@ -15,24 +17,16 @@ import React from "react";
 import { BiMessageAltDots } from "react-icons/bi";
 import { FiSend } from "react-icons/fi";
 import { useAuth } from "../../../../services/auth";
-import { postedString, salaryString } from "../utilities";
+import { postedString, salaryString } from "../../professional/utilities";
 
-export function ApplyCard({ apply }) {
+export function PostingCard({ job }) {
   const auth = useAuth();
   return (
-    <AccordionItem bg={"white"} key={apply?.id}>
-      <AccordionButton key={apply?.created_at}>
+    <AccordionItem bg={"white"}>
+      <AccordionButton>
         <Box flex="1">
           <Flex flex={1} gap="0.5rem">
             <Flex gap="0.5rem" direction={["column", "column", "row", "row"]}>
-              <Image
-                objectFit="cover"
-                maxW="100px"
-                bg="gray.100"
-                w={[null, null, "100px"]}
-                borderRadius="lg"
-                src={apply?.job?.logo_url}
-              />
               <Box
                 display={["flex"]}
                 flexDirection="column"
@@ -48,17 +42,7 @@ export function ApplyCard({ apply }) {
                   transition={"all 0.1s ease-in"}
                   textAlign="left"
                 >
-                  {apply?.job?.name}
-                </Text>
-                <Text
-                  color="gray.900"
-                  fontSize={"0.6rem"}
-                  fontFamily={"body"}
-                  m={"0"}
-                  transition={"all 0.1s ease-in"}
-                  textAlign="left"
-                >
-                  {apply?.job?.company?.name.replaceAll("\\s+", " ")}
+                  {job?.name}
                 </Text>
               </Box>
             </Flex>
@@ -66,17 +50,17 @@ export function ApplyCard({ apply }) {
             <Stack direction={["column", "row", "row"]} py="0.5rem">
               <Stack direction={"column"} mr={[null, "5.5rem", "5rem", "5rem"]}>
                 <Badge colorScheme="blue" fontSize={"0.6rem"}>
-                  {apply?.job?.category}
+                  {job?.category}
                 </Badge>
-                <Badge fontSize={"0.6rem"}>{apply?.job?.type}</Badge>
+                <Badge fontSize={"0.6rem"}>{job?.type}</Badge>
                 <Badge colorScheme="green" fontSize={"0.6rem"}>
-                  {salaryString(apply?.job?.salary_min, apply?.job?.salary_max)}
+                  {salaryString(job?.salary_min, job?.salary_max)}
                 </Badge>
                 <Badge colorScheme="purple" fontSize={"0.6rem"}>
-                  {postedString(apply?.created_at)}
+                  {postedString(job?.created_at)}
                 </Badge>
               </Stack>
-              <Box>
+              {/* <Box>
                 <Text fontSize={"0.8rem"} display="flex" alignItems="center">
                   <FiSend />
                   &nbsp; Sent {postedString(apply?.created_at)}
@@ -85,7 +69,7 @@ export function ApplyCard({ apply }) {
                   <BiMessageAltDots />
                   &nbsp;{apply?.status?.name}
                 </Text>
-              </Box>
+              </Box> */}
             </Stack>
             <Stack direction="row" py="0.5rem"></Stack>
           </Flex>
@@ -93,7 +77,7 @@ export function ApplyCard({ apply }) {
         <AccordionIcon />
       </AccordionButton>
 
-      <AccordionPanel pb={4} key={apply?.created_at + "2"}>
+      <AccordionPanel pb={4}>
         <Flex
           flexDirection={"column"}
           justifyContent={"flex-start"}
@@ -103,26 +87,14 @@ export function ApplyCard({ apply }) {
           py={"1rem"}
         >
           <Heading fontSize={"xl"} fontFamily={"body"} m={"0"} color="blue.500">
-            Professional experience
+            About the job position
           </Heading>
           <Text fontSize={"1rem"} color="gray.900" fontWeight={"400"}>
-            {auth.user?.experience || "No description"}
+            {job?.description || "No description"}
           </Text>
-        </Flex>
-        <Flex
-          flexDirection={"column"}
-          justifyContent={"flex-start"}
-          alignItems={"flex-start"}
-          gap="1rem"
-          px={"1rem"}
-          py={"1rem"}
-        >
-          <Heading fontSize={"xl"} fontFamily={"body"} m={"0"} color="blue.500">
-            Why are you interested in working at {apply?.job?.company?.name}
-          </Heading>
-          <Text fontSize={"1rem"} color="gray.900" fontWeight={"400"}>
-            {apply?.message || "No description"}
-          </Text>
+          <Center>
+            <Button>Show</Button>
+          </Center>
         </Flex>
       </AccordionPanel>
     </AccordionItem>

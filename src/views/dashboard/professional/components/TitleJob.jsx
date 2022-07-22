@@ -1,5 +1,6 @@
 import { Center, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
+import { salaryString } from "../utilities";
 import { TagBoxJob } from "./TagsBoxJob";
 
 export function TitleJob({ job }) {
@@ -23,7 +24,7 @@ export function TitleJob({ job }) {
         <TagBoxJob title={job?.category} subtitle="Category" />
         <TagBoxJob title={job?.type} subtitle="Type" />
         <TagBoxJob
-          title={`${job?.salary_min} - ${job?.salary_max}`}
+          title={salaryString(job?.salary_min, job?.salary_max)}
           subtitle="Salary"
         />
       </SimpleGrid>

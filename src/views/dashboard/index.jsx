@@ -1,4 +1,4 @@
 import { DashboardView } from "./DashboardView";
-import { Profile, EditProfile } from "./Profile";
+import { Profile, EditProfile, EditProfileRecruiter } from "./Profile";
 
-export { DashboardView, Profile, EditProfile };
+export { DashboardView, Profile, EditProfile, EditProfileRecruiter };

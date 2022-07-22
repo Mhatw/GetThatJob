@@ -11,32 +11,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import Logo2 from "../assets/logo2.png";
 import { Logout } from "./Logout";
-import { AiOutlineSearch } from "react-icons/ai";
-import { BiListCheck, BiTargetLock, BiUser } from "react-icons/bi";
-const professionalNav = [
-  {
-    name: "Find Job",
-    to: "/dashboard/professional/find-job/all",
-    icon: <AiOutlineSearch />,
-  },
-  {
-    name: "Your Applications",
-    to: "/dashboard/professional/applies/all",
-    icon: <BiListCheck />,
-  },
-  {
-    name: "Following",
-    to: "/dashboard/professional/following",
-    icon: <BiTargetLock />,
-  },
-  {
-    name: "Profile",
-    to: "/dashboard/professional/profile",
-    icon: <BiUser />,
-  },
-];
 
-export function NavBar() {
+export function NavBar({ data }) {
   const [isLargerThan992] = useMediaQuery("(min-width: 992px)");
   return (
     <Flex
@@ -59,7 +35,7 @@ export function NavBar() {
         )}
       </Box>
 
-      {professionalNav.map((nav) => (
+      {data.map((nav) => (
         <NavButton key={nav.name} to={nav.to} icon={nav.icon}>
           {nav.name}
         </NavButton>

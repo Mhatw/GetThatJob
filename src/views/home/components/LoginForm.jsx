@@ -8,18 +8,32 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
 import { PasswordInput } from "./PasswordInput";
 
 export function LoginForm() {
   const auth = useAuth();
-
+  const location = useLocation();
+  console.log(location.pathname.split("/")[2]);
+  const userType =
+    location.pathname.split("/")[2] === "professional"
+      ? "Professional"
+      : "Company";
   const toast = useToast();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    user_type: userType,
   });
+  useEffect(() => {
+    setCredentials({
+      ...credentials,
+      user_type: userType,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userType]);
 
   async function handleLogin(e) {
     e.preventDefault();

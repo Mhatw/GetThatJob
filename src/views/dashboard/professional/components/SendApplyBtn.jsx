@@ -34,9 +34,9 @@ export function SendApplyBtn({ id, app }) {
     console.log(bool, "bool");
   }, [data.applies, bool, id]);
   const sendApplication = async () => {
+    console.log(app, "app");
     const application = {
       application: {
-        follow: false,
         message: app?.message || "no message",
         job_id: parseInt(id),
         status_id: 1,

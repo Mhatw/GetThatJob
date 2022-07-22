@@ -19,7 +19,7 @@ export function TagBoxJob({ title, subtitle }) {
         <Text fontSize={"0.6rem"} color="gray.400" fontWeight={"400"}>
           {subtitle}
         </Text>
-        <Heading fontSize={["sm", "md", "md"]} m={"0"} color="gray.900">
+        <Heading fontSize={["sm", "sm", "md"]} m={"0"} color="gray.900">
           {title}
         </Heading>
       </Box>
