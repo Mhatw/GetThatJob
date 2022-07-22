@@ -1,7 +1,6 @@
 import { Center, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import { JobCard } from "./components";
 
 import { useData } from "../../../context/dataContext";
@@ -36,8 +35,6 @@ export function FilterJob() {
           </SimpleGrid>
         </Center>
       </Flex>
-
-      <Link to="../job/2">All</Link>
     </>
   );
 }
