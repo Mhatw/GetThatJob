@@ -39,12 +39,9 @@ export function ApplyCard({ apply }) {
                 justifyContent="flex-start"
                 alignItems="flex-start"
                 px="1rem"
-                // gap="0.5rem"
-                // w={["70%", "70%", "50%"]}
               >
                 <Text
                   color="gray.900"
-                  // fontSize={"2xl"}
                   fontFamily={"body"}
                   fontWeight="bold"
                   m={"0"}

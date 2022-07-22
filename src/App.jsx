@@ -95,9 +95,6 @@ function App() {
           <Route path="edit-profile" element={<EditProfile />} />
         </Route>
       </Route>
-
-      {/* logout */}
-      {/* <Route path="/logout" element={<Logout />} /> */}
     </Routes>
   );
 }

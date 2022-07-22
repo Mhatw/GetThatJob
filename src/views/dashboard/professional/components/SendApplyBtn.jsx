@@ -8,7 +8,6 @@ import {
   AlertDialogHeader,
   AlertDialogBody,
   AlertDialogFooter,
-  Box,
   Circle,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -118,41 +117,6 @@ export function SendApplyBtn({ id, app }) {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-      {/* ------------- */}
-      {/* <Modal
-        isCentered
-        onClose={onClose}
-        isOpen={isOpen}
-        motionPreset="slideInBottom"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Send application for a job</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Are you sure you want to send this application?</ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-            <Button
-              variant="ghost"
-              as={Link}
-              to={`../job-apply/${id}`}
-              colorScheme={"green"}
-              onClick={sendApplication}
-              isDisabled={bool}
-            >
-              Send
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal> */}
     </>
   );
 }
-
-// function TransitionExample() {
-//   return (
-//     <>
-//       <Button onClick={onOpen}>Open Modal</Button>
-//     </>
-//   );
-// }

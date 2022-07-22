@@ -97,21 +97,15 @@ export const DataProvider = ({ children }) => {
     });
   });
   useEffect(() => {
-    console.log(applies, "applies");
-    console.log(applies, "applies after");
     applies.forEach((apply) => {
       apply["job"] = jobs.find((job) => job?.id === apply?.job_id);
-      console.log(jobs, "jobs");
       apply["status"] = status.find((status) => status.id === apply.status_id);
-      console.log(status, "status");
-      console.log(applies, "applies after");
     });
   }, [applies, jobs, status]);
   useEffect(() => {
     status.forEach((status) => {
       status["route"] = status.name.toLowerCase().replace(/ /g, "-");
     });
-    console.log(status, "status222");
   }, [status]);
   return (
     <DataContext.Provider

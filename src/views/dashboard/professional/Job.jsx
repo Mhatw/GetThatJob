@@ -38,7 +38,6 @@ export function Job() {
         <Center mt="2rem">
           <ApplyButton id={params?.id} />
         </Center>
-        {/* <Link to={`../job-apply/${params?.id}`}>apply</Link> */}
       </Box>
     </Flex>
   );

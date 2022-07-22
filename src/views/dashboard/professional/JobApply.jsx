@@ -3,9 +3,7 @@ import {
   Center,
   Flex,
   FormControl,
-  FormHelperText,
   FormLabel,
-  Input,
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
@@ -74,7 +72,6 @@ export function JobApply() {
         <Center mt="2rem">
           <SendApplyBtn id={params?.id} data={apply} />
         </Center>
-        {/* <Link to={`../job-apply/${params?.id}`}>apply</Link> */}
       </Box>
     </Flex>
   );

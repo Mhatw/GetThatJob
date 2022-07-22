@@ -65,7 +65,6 @@ export function JobCard({ job }) {
                 objectFit="cover"
                 maxW="130px"
                 bg="gray.500"
-                // maxH="130px"
                 w={["60px", "130px", "130px"]}
                 h={["60px", "130px", "130px"]}
                 borderRadius="lg"
@@ -76,10 +75,6 @@ export function JobCard({ job }) {
               flexDirection="column"
               justifyContent="flex-start"
               alignItems="flex-start"
-              // border={"1px"}
-
-              // p={1}
-              // pt={2}
             >
               <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
                 {job.category}
@@ -100,8 +95,6 @@ export function JobCard({ job }) {
                 mb={"0.4rem"}
                 fontSize={"sm"}
                 fontWeight={"bold"}
-                // wordBreak={"break-word"}
-                // whiteSpace={"pre-wrap"}
                 overflow={"hidden"}
                 w="200px"
                 h="40px"
@@ -147,11 +140,7 @@ export function JobCard({ job }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Button
-              fontSize={"sm"}
-              leftIcon={<BiTargetLock />}
-              // width={["100%", ""]}
-            >
+            <Button fontSize={"sm"} leftIcon={<BiTargetLock />}>
               follow
             </Button>
             <Button
