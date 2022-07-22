@@ -36,7 +36,6 @@ export function SendApplyBtn({ id, app }) {
   const sendApplication = async () => {
     const application = {
       application: {
-        follow: false,
         message: app?.message || "no message",
         job_id: parseInt(id),
         status_id: 1,

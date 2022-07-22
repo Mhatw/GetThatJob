@@ -5,7 +5,12 @@ import { DataProvider } from "./context/dataContext";
 import { NoRequireAuth } from "./services/NoRequireAuth";
 import { RequireAuth } from "./services/RequireAuth";
 import { UserableAuth } from "./services/UserableAuth";
-import { DashboardView, EditProfile, Profile } from "./views/dashboard";
+import {
+  DashboardView,
+  EditProfile,
+  EditProfileRecruiter,
+  Profile,
+} from "./views/dashboard";
 import {
   Applies,
   Company,
@@ -80,7 +85,7 @@ function App() {
           </Route>
           <Route path="create-job" element={<CreateJob />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="edit-profile" element={<EditProfile />} />
+          <Route path="edit-profile" element={<EditProfileRecruiter />} />
         </Route>
         {/* professional routes */}
         <Route

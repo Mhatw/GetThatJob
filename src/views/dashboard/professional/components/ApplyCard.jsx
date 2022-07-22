@@ -28,7 +28,7 @@ export function ApplyCard({ apply }) {
               <Image
                 objectFit="cover"
                 maxW="100px"
-                bg="gray.500"
+                bg="gray.100"
                 w={[null, null, "100px"]}
                 borderRadius="lg"
                 src={apply?.job?.logo_url}

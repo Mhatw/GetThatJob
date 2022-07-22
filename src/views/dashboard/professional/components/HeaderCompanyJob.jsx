@@ -9,7 +9,7 @@ export function HeaderCompanyJob({ job, isLink }) {
       <Image
         objectFit="cover"
         maxW="130px"
-        bg="gray.500"
+        bg="gray.100"
         w={["30%", "30%", "130px"]}
         borderRadius="lg"
         src={job?.logo_url}

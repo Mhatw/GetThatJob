@@ -49,7 +49,7 @@ export async function createJob(body) {
     },
   };
   const response = await axios.request(options);
-  const { token, ...user } = response.data;
+  // const { token, ...user } = response.data;
 
   return response.data;
 }

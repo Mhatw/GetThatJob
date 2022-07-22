@@ -11,9 +11,7 @@ export function UserableAuth({ children }) {
     auth.user?.type_user === "Professional"
       ? "professional"
       : "recruiter";
-  console.log(auth.user);
-  console.log(typeUser);
-  console.log(location.pathname.match(`dashboard/${typeUser}`));
+
   if (
     !location.pathname.match(`dashboard/${typeUser}`) &&
     !auth.isLoadingView

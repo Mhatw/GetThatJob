@@ -64,7 +64,7 @@ export function JobCard({ job }) {
               <Image
                 objectFit="cover"
                 maxW="130px"
-                bg="gray.500"
+                bg="gray.100"
                 w={["60px", "130px", "130px"]}
                 h={["60px", "130px", "130px"]}
                 borderRadius="lg"
