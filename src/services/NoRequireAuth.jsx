@@ -5,12 +5,16 @@ import { useAuth } from "./auth";
 export function NoRequireAuth({ children }) {
   const auth = useAuth();
   let location = useLocation();
-
   if (
     auth.user &&
     location.pathname !== "/dashboard/professional/find-job/all"
   ) {
-    return <Navigate to="/dashboard/professional/find-job/all" />;
+    const route =
+      auth?.user?.user_type === "Professional"
+        ? "/dashboard/professional/find-job/all"
+        : "/dashboard/recruiter";
+
+    return <Navigate to={route} />;
   }
   return auth.isLoadingView ? loaderView : children;
 }

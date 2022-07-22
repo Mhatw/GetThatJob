@@ -4,6 +4,7 @@ import "./App.css";
 import { DataProvider } from "./context/dataContext";
 import { NoRequireAuth } from "./services/NoRequireAuth";
 import { RequireAuth } from "./services/RequireAuth";
+import { UserableAuth } from "./services/UserableAuth";
 import { DashboardView, EditProfile, Profile } from "./views/dashboard";
 import {
   Applies,
@@ -65,7 +66,14 @@ function App() {
         }
       >
         {/* recruiter routes */}
-        <Route path="recruiter" element={<Recruiter />}>
+        <Route
+          path="recruiter"
+          element={
+            <UserableAuth>
+              <Recruiter />
+            </UserableAuth>
+          }
+        >
           <Route path="post-job" element={<PostJob />}>
             <Route path="category/:category" element={<PostCategory />} />
             <Route path="show/:job" element={<ShowJob />} />
@@ -75,7 +83,14 @@ function App() {
           <Route path="edit-profile" element={<EditProfile />} />
         </Route>
         {/* professional routes */}
-        <Route path="professional" element={<Professional />}>
+        <Route
+          path="professional"
+          element={
+            <UserableAuth>
+              <Professional />
+            </UserableAuth>
+          }
+        >
           <Route path="find-job" element={<FindJob />}>
             <Route
               path=":filter"

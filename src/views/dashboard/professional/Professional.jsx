@@ -1,15 +1,9 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet } from "react-router";
 import { NavBar } from "../../../components";
-import { useSingleEffect } from "react-haiku";
 
 export function Professional() {
-  let navigate = useNavigate();
-
-  useSingleEffect(() => {
-    navigate("/dashboard/professional/find-job/all");
-  });
   return (
     <Grid
       templateAreas={`
