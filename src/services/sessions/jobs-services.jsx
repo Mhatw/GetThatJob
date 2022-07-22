@@ -29,14 +29,27 @@ export async function indexReloadedJobs() {
   return response.data;
 }
 
-// const options = {
-//   method: 'GET',
-//   url: 'https://get-that-jobs-api.herokuapp.com//jobs',
-//   headers: {Authorization: 'Token token=T8ohvDaK9by7WtPMthF9u7Kg'}
-// };
+export async function createJob(body) {
+  const options = {
+    method: "POST",
+    url: `${BASE_URI}/jobs`,
+    headers: {
+      Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+      "Content-Type": "application/json",
+    },
+    data: {
+      job: {
+        name: body.name,
+        description: body.description,
+        type_id: parseInt(body.type_id),
+        category_id: parseInt(body.category_id),
+        salary_min: parseInt(body.salary_min),
+        salary_max: parseInt(body.salary_max),
+      },
+    },
+  };
+  const response = await axios.request(options);
+  const { token, ...user } = response.data;
 
-// axios.request(options).then(function (response) {
-//   console.log(response.data);
-// }).catch(function (error) {
-//   console.error(error);
-// });
+  return response.data;
+}

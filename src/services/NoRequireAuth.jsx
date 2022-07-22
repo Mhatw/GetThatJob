@@ -12,7 +12,7 @@ export function NoRequireAuth({ children }) {
     const route =
       auth?.user?.user_type === "Professional"
         ? "/dashboard/professional/find-job/all"
-        : "/dashboard/recruiter";
+        : "/dashboard/recruiter/post-job/category/all";
 
     return <Navigate to={route} />;
   }

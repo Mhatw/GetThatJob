@@ -9,7 +9,7 @@ export function DashboardView() {
   const route =
     auth?.user?.user_type === "Professional"
       ? "/dashboard/professional/find-job/all"
-      : "/dashboard/recruiter";
+      : "/dashboard/recruiter/post-job/category/all";
   useSingleEffect(() => {
     navigate(route);
   });

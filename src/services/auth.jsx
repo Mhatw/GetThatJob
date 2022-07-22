@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       const route =
         user?.user_type === "Professional"
           ? "/dashboard/professional/find-job/all"
-          : "/dashboard/recruiter";
+          : "/dashboard/recruiter/post-job/category/all";
       navigate(route);
     });
   }

@@ -18,7 +18,7 @@ export function Profile() {
   console.log(auth.user);
   return (
     <>
-      <Flex flexDirection={"column"} mW="80%">
+      <Flex flexDirection={"column"}>
         <Heading
           px={"2rem"}
           color="blue.700"
@@ -86,7 +86,7 @@ export function Profile() {
               fontWeight="500"
               whiteSpace="wrap"
               // w="80%"
-              wordWrap="break-word"
+              // wordWrap="break-word"
             >
               {auth.user?.linkedin_url}
             </Text>
@@ -108,7 +108,7 @@ export function Profile() {
               fontWeight="500"
               whiteSpace="wrap"
               // w="80%"
-              wordWrap="break-word"
+              // wordWrap="break-word"
             >
               {auth.user?.experience || "No information"}
             </Text>
@@ -123,7 +123,7 @@ export function Profile() {
               whiteSpace="wrap"
               // w="80%"
 
-              wordWrap="break-word"
+              // wordWrap="break-word"
             >
               {auth.user?.education || "No information"}
             </Text>
@@ -164,7 +164,7 @@ export function EditProfile() {
   console.log(profile);
   return (
     <>
-      <Flex flexDirection={"column"} mW="80%">
+      <Flex flexDirection={"column"}>
         <Heading
           px={"2rem"}
           color="blue.700"

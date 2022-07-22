@@ -1,7 +1,32 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { BiListCheck, BiTargetLock, BiUser } from "react-icons/bi";
 import { Outlet } from "react-router";
 import { NavBar } from "../../../components";
+
+const professionalNav = [
+  {
+    name: "Find Job",
+    to: "/dashboard/professional/find-job/all",
+    icon: <AiOutlineSearch />,
+  },
+  {
+    name: "Your Applications",
+    to: "/dashboard/professional/applies/all",
+    icon: <BiListCheck />,
+  },
+  {
+    name: "Following",
+    to: "/dashboard/professional/following",
+    icon: <BiTargetLock />,
+  },
+  {
+    name: "Profile",
+    to: "/dashboard/professional/profile",
+    icon: <BiUser />,
+  },
+];
 
 export function Professional() {
   return (
@@ -16,7 +41,7 @@ export function Professional() {
       fontWeight="bold"
     >
       <GridItem area={"nav"}>
-        <NavBar />
+        <NavBar data={professionalNav} />
       </GridItem>
       <GridItem
         bg="gray.50"
