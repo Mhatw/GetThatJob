@@ -20,6 +20,7 @@ import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import { Link } from "react-router-dom";
 import { salaryString } from "../utilities";
+import { FollowButton } from "./FollowButton";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
   const auth = useAuth();
@@ -113,7 +114,7 @@ export function JobCard({ job }) {
                 >
                   <TagLeftIcon boxSize="12px" as={BsFillCalendarFill} />
                   <TagLabel ml={-1} fontSize="0.8rem">
-                    Full-time
+                    {job?.type}
                   </TagLabel>
                 </Tag>
 
@@ -140,9 +141,7 @@ export function JobCard({ job }) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Button fontSize={"sm"} leftIcon={<BiTargetLock />}>
-              follow
-            </Button>
+            <FollowButton job={job} />
             <Button
               as={Link}
               to={`/dashboard/professional/find-job/job/${job.id}`}

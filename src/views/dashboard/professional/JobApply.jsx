@@ -36,7 +36,7 @@ export function JobApply() {
           py={"1rem"}
         >
           <HeaderCompanyJob job={job} isLink />
-          <SendApplyBtn id={params?.id} data={apply} />
+          <SendApplyBtn id={params?.id} app={apply} />
         </Flex>
         {/* title */}
         <TitleJob job={job} />
@@ -70,7 +70,7 @@ export function JobApply() {
           </FormControl>
         </Flex>
         <Center mt="2rem">
-          <SendApplyBtn id={params?.id} data={apply} />
+          <SendApplyBtn id={params?.id} app={apply} />
         </Center>
       </Box>
     </Flex>

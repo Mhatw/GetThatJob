@@ -11,7 +11,7 @@ export async function indexApplications() {
   };
   const response = await axios.request(options);
 
-  return response.data;
+  return response.data.reverse();
 }
 
 export async function createApplications(app) {

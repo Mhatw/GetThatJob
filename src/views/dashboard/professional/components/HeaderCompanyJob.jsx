@@ -2,6 +2,7 @@ import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
 import React from "react";
 import { BiTargetLock } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { FollowButton } from "./FollowButton";
 
 export function HeaderCompanyJob({ job, isLink }) {
   return (
@@ -37,9 +38,7 @@ export function HeaderCompanyJob({ job, isLink }) {
         >
           {job?.company.name}
         </Heading>
-        <Button fontSize={"sm"} leftIcon={<BiTargetLock />} border="2px">
-          follow
-        </Button>
+        {isLink && <FollowButton job={job} />}
       </Box>
     </Flex>
   );
