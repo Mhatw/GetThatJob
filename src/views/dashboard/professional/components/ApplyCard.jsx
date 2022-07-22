@@ -38,7 +38,7 @@ export function ApplyCard({ apply }) {
                 flexDirection="column"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                px="1rem"
+                maxW="100px"
               >
                 <Text
                   color="gray.900"
@@ -46,6 +46,7 @@ export function ApplyCard({ apply }) {
                   fontWeight="bold"
                   m={"0"}
                   transition={"all 0.1s ease-in"}
+                  textAlign="left"
                 >
                   {apply?.job?.name}
                 </Text>
@@ -55,8 +56,9 @@ export function ApplyCard({ apply }) {
                   fontFamily={"body"}
                   m={"0"}
                   transition={"all 0.1s ease-in"}
+                  textAlign="left"
                 >
-                  {apply?.job?.company?.name}
+                  {apply?.job?.company?.name.replaceAll("\\s+", " ")}
                 </Text>
               </Box>
             </Flex>
