@@ -1,17 +1,39 @@
-import { Button, useToast } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  useDisclosure,
+  useToast,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  Box,
+  Circle,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { FiSend } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
 import { useData } from "../../../../context/dataContext";
 import { useAuth } from "../../../../services/auth";
 import { createApplications } from "../../../../services/sessions/applications-services";
 
 export function SendApplyBtn({ id, app }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [bool, setBool] = useState(false);
   const toast = useToast();
   const auth = useAuth();
   const data = useData();
+  const navigate = useNavigate();
   console.log(data.applies, "data.applies", parseInt(id));
-  const bool =
-    data.applies.filter((apply) => apply.job_id === parseInt(id)).length > 0;
-  console.log(bool, "bool");
+  useEffect(() => {
+    if (
+      data.applies.filter((apply) => apply.job_id === parseInt(id)).length > 0
+    ) {
+      setBool(true);
+    }
+    console.log(bool, "bool");
+  }, [data.applies, bool, id]);
   const sendApplication = async () => {
     const application = {
       application: {
@@ -22,8 +44,10 @@ export function SendApplyBtn({ id, app }) {
       },
     };
     try {
-      await createApplications(application);
-      // auth.indexApplies();
+      const res = await createApplications(application);
+      console.log(res, "res");
+      data.applies.push(res);
+      navigate("/");
       toast({
         title: "Success",
         description: "You have successfully applied",
@@ -43,18 +67,92 @@ export function SendApplyBtn({ id, app }) {
       });
     }
     auth.setIsLoading(false);
+    onClose();
   };
 
   return (
-    <Button
-      as={Link}
-      to={`../job-apply/${id}`}
-      colorScheme={"orange"}
-      onClick={sendApplication}
-      isDisabled={bool}
-      isLoading={auth.isLoading}
-    >
-      {bool ? "Applied" : "Send application"}
-    </Button>
+    <>
+      <Button
+        colorScheme={"orange"}
+        onClick={onOpen}
+        // onClick={sendApplication}
+        isDisabled={bool}
+        isLoading={auth.isLoading}
+      >
+        {bool ? "Applied" : "Send application"}
+      </Button>
+      <AlertDialog isOpen={isOpen} onClose={onClose}>
+        <AlertDialogOverlay>
+          <AlertDialogContent mx="3rem" my="10rem">
+            <AlertDialogHeader
+              fontSize="lg"
+              fontWeight="bold"
+              display={"flex"}
+              gap="0.5rem"
+              alignItems={"center"}
+              justifyContent={"flex-start"}
+            >
+              <Circle bg="green" p="0.5rem">
+                <FiSend color="white" />
+              </Circle>{" "}
+              Send application
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure you want to send this application?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button onClick={onClose}>Cancel</Button>
+              <Button
+                as={Link}
+                to={`../job-apply/${id}`}
+                colorScheme={"green"}
+                onClick={sendApplication}
+                isDisabled={bool}
+                ml={3}
+              >
+                Send
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+      {/* ------------- */}
+      {/* <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Send application for a job</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Are you sure you want to send this application?</ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+            <Button
+              variant="ghost"
+              as={Link}
+              to={`../job-apply/${id}`}
+              colorScheme={"green"}
+              onClick={sendApplication}
+              isDisabled={bool}
+            >
+              Send
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal> */}
+    </>
   );
 }
+
+// function TransitionExample() {
+//   return (
+//     <>
+//       <Button onClick={onOpen}>Open Modal</Button>
+//     </>
+//   );
+// }

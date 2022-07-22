@@ -27,7 +27,7 @@ export function ApplyCard({ apply }) {
             <Flex gap="0.5rem" direction={["column", "column", "row", "row"]}>
               <Image
                 objectFit="cover"
-                maxW="130px"
+                maxW="100px"
                 bg="gray.500"
                 w={[null, null, "100px"]}
                 borderRadius="lg"

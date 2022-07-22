@@ -19,13 +19,10 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import { Link } from "react-router-dom";
+import { salaryString } from "../utilities";
 export function JobCard({ job }) {
   // funtion for transform money to abbreviated
   const auth = useAuth();
-  const formatCash = (n) => {
-    if (n < 1e3) return n;
-    if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
-  };
   // function for random element in array
   const randomElement = (array) => {
     return array[Math.floor(Math.random() * array.length)];
@@ -40,9 +37,7 @@ export function JobCard({ job }) {
     "https://i.ytimg.com/vi/Ew0cCLyGsgQ/maxresdefault.jpg",
   ]);
 
-  const salary = `${formatCash(job.salary_min)} - ${formatCash(
-    job.salary_max
-  )}`;
+  const salary = salaryString(job.salary_min, job.salary_max);
   return (
     <Skeleton borderRadius={"lg"} isLoaded={!auth.isLoading} fadeDuration={2}>
       <Center
