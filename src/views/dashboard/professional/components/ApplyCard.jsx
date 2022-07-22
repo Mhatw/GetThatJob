@@ -20,8 +20,8 @@ import { postedString, salaryString } from "../utilities";
 export function ApplyCard({ apply }) {
   const auth = useAuth();
   return (
-    <AccordionItem bg={"white"}>
-      <AccordionButton>
+    <AccordionItem bg={"white"} key={apply?.id}>
+      <AccordionButton key={apply?.created_at}>
         <Box flex="1">
           <Flex flex={1} gap="0.5rem">
             <Flex gap="0.5rem" direction={["column", "column", "row", "row"]}>
@@ -59,7 +59,7 @@ export function ApplyCard({ apply }) {
                   m={"0"}
                   transition={"all 0.1s ease-in"}
                 >
-                  {apply?.job?.company.name}
+                  {apply?.job?.company?.name}
                 </Text>
               </Box>
             </Flex>
@@ -94,7 +94,7 @@ export function ApplyCard({ apply }) {
         <AccordionIcon />
       </AccordionButton>
 
-      <AccordionPanel pb={4}>
+      <AccordionPanel pb={4} key={apply?.created_at + "2"}>
         <Flex
           flexDirection={"column"}
           justifyContent={"flex-start"}

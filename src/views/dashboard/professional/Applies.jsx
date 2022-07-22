@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
-import { useSingleEffect } from "react-haiku";
 import { useData } from "../../../context/dataContext";
 
 import { ApplyCard } from "./components";
@@ -22,19 +21,16 @@ export function Applies() {
   const data = useData();
   const location = useLocation();
 
-  useSingleEffect(() => {
-    data.indexApplies();
-    data.indexStatus();
-  });
   const selectApplies =
     params?.category !== "all"
-      ? data?.applies.filter((apply) => apply.status.route === params?.category)
+      ? data?.applies.filter(
+          (apply) => apply?.status?.route === params?.category
+        )
       : data?.applies;
   console.log(selectApplies, "selectApplies");
   const HandleFilter = (e) => {
     navigate(`/dashboard/professional/applies/${e.target.value}`);
   };
-  console.log(selectApplies[0]?.created_at, "selectApplies[0]");
   return (
     <Flex w={"100%"} justifyContent="center">
       <Center flexDirection={"column"} maxW="xl">

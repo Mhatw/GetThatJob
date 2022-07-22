@@ -27,7 +27,7 @@ export function Job() {
           py={"1rem"}
         >
           <HeaderCompanyJob job={job} isLink />
-          <ApplyButton />
+          <ApplyButton id={params?.id} />
         </Flex>
         {/* title */}
         <TitleJob job={job} />
@@ -36,7 +36,7 @@ export function Job() {
           <DescriptionJob job={job} />
         </Flex>
         <Center mt="2rem">
-          <ApplyButton />
+          <ApplyButton id={params?.id} />
         </Center>
         {/* <Link to={`../job-apply/${params?.id}`}>apply</Link> */}
       </Box>

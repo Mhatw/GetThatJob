@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { indexCategories } from "../services/sessions/category-services";
 import { indexReloadedJobs } from "../services/sessions/jobs-services";
 import { useSingleEffect } from "react-haiku";
@@ -60,9 +60,7 @@ export const DataProvider = ({ children }) => {
     try {
       await indexStatus().then((res) => {
         console.log(res, "status");
-        res.forEach((status) => {
-          status["route"] = status.name.toLowerCase().replace(/ /g, "-");
-        });
+
         setStatus(res);
       });
     } catch (error) {
@@ -74,13 +72,8 @@ export const DataProvider = ({ children }) => {
     try {
       await indexApplications().then((res) => {
         console.log(res, "Applies");
-        res.forEach((apply) => {
-          apply["job"] = jobs.find((job) => job.id === apply.job_id);
-          apply["status"] = status.find(
-            (status) => status.id === apply.status_id
-          );
-          auth.setIsLoading(false);
-        });
+
+        auth.setIsLoading(false);
 
         setApplies(res);
       });
@@ -91,10 +84,35 @@ export const DataProvider = ({ children }) => {
   }
 
   useSingleEffect(() => {
-    handleIndexJobs();
-    handleIndexCat();
-    handleIndexTypes();
+    let promises = [
+      handleIndexJobs(),
+      handleIndexCat(),
+      handleIndexTypes(),
+      handleIndexStatus(),
+      handleIndexApplies(),
+    ];
+    Promise.all(promises).then(() => {
+      auth.setIsLoading(false);
+      console.log("all promises resolved");
+    });
   });
+  useEffect(() => {
+    console.log(applies, "applies");
+    console.log(applies, "applies after");
+    applies.forEach((apply) => {
+      apply["job"] = jobs.find((job) => job?.id === apply?.job_id);
+      console.log(jobs, "jobs");
+      apply["status"] = status.find((status) => status.id === apply.status_id);
+      console.log(status, "status");
+      console.log(applies, "applies after");
+    });
+  }, [applies, jobs, status]);
+  useEffect(() => {
+    status.forEach((status) => {
+      status["route"] = status.name.toLowerCase().replace(/ /g, "-");
+    });
+    console.log(status, "status222");
+  }, [status]);
   return (
     <DataContext.Provider
       value={{

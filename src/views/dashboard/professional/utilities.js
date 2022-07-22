@@ -1,7 +1,5 @@
 export function postedString(created) {
-  console.log(created, "creatd");
   const posted = (new Date() - new Date(created)) / (1000 * 60);
-  console.log(posted < 60, "posted");
   let string;
   if (posted < 60) {
     string = `${Math.round(posted)} min ago`;
