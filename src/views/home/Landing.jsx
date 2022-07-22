@@ -69,7 +69,14 @@ export function Landing() {
             >
               Create an account now
             </Button>
-            <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+            <Button
+              variant={"link"}
+              colorScheme={"blue"}
+              size={"sm"}
+              onClick={() =>
+                document.getElementById("myElementSomewhere").scrollIntoView()
+              }
+            >
               Learn more
             </Button>
             <Box>
@@ -103,7 +110,11 @@ export function Landing() {
         </Flex>
       </Container>
       {/* information */}
-      <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+      <Stack
+        minH={"100vh"}
+        direction={{ base: "column", md: "row" }}
+        id="myElementSomewhere"
+      >
         <Flex
           p={8}
           flex={1}

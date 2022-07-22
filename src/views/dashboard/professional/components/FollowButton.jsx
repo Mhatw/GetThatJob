@@ -4,6 +4,7 @@ import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import {
   followJob,
+  indexfollow,
   unfollowJob,
 } from "../../../../services/sessions/follow-services";
 import { useSingleEffect } from "react-haiku";
@@ -42,14 +43,30 @@ export function FollowButton({ job }) {
   const handleUnfollow = async () => {
     auth.setIsLoading(true);
     try {
-      await unfollowJob(job.id);
-      auth.setIsLoading(false);
-      setIsFollowing(!isFollowing);
-      data.jobs?.forEach((e) => {
-        if (e.id === job.id) {
-          e.following = !isFollowing;
-        }
-      });
+      const follows = await indexfollow();
+      console.log(follows, "follows");
+      console.log(job.id, "job.id");
+      console.log(follows?.find((e) => e.job_id === job.id).id, "aaaaaaaaa");
+      try {
+        const followId = follows?.find((e) => e.job_id === job.id).id;
+        await unfollowJob(followId);
+        auth.setIsLoading(false);
+        setIsFollowing(!isFollowing);
+        data.jobs?.forEach((e) => {
+          if (e.id === job.id) {
+            e.following = !isFollowing;
+          }
+        });
+      } catch (error) {
+        console.log(error);
+        auth.setIsLoading(false);
+        toast({
+          title: "Error unfollowing job",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
 
       console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
