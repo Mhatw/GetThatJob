@@ -19,7 +19,20 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiFillAlert } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
+import {
+  createProfessional,
+  updateProfessional,
+} from "../../../services/sessions/professional-services";
+import {
+  createRecruiter,
+  updateRecruiter,
+} from "../../../services/sessions/recruiter-services";
+import {
+  signupProfessional,
+  signupRecruiter,
+} from "../../../services/sessions/user-services";
 import FileUpload from "./FileUpload";
 import { PasswordInput } from "./PasswordInput";
 import { StepProgress } from "./StepProgress";
@@ -32,7 +45,7 @@ let StepProgressData = [
   },
   {
     status: "PENDING",
-    label: "Password",
+    label: "Personal",
     label2: "information",
   },
   {
@@ -41,41 +54,159 @@ let StepProgressData = [
     label2: "information",
   },
 ];
+let StepProgressDataRecruiter = [
+  {
+    status: "IN PROGRESS",
+    label: "Login",
+    label2: "information",
+  },
+  {
+    status: "PENDING",
+    label: "Company",
+    label2: "information",
+  },
+];
 
 export function SignupForm() {
   const auth = useAuth();
   const toast = useToast();
   const [step, setStep] = useState(0);
+  const [id, setId] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location.pathname.split("/")[2]);
+  const userType =
+    location.pathname.split("/")[2] === "professional"
+      ? "Professional"
+      : "Company";
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
-  async function handleLogin(e) {
+  async function handleUpdate(e) {
     e.preventDefault();
-    auth.setIsLoading(true);
-    console.log(credentials);
-    // try {
-    //   await auth.login(credentials);
-    //   toast({
-    //     title: "Success",
-    //     description: "You have successfully logged in",
-    //     status: "success",
-    //     duration: 9000,
-    //     isClosable: true,
-    //   });
-    // } catch (error) {
-    //   toast({
-    //     title: "Login failed",
-    //     description: `${
-    //       error?.response?.data?.unauthorized || "something went wrong"
-    //     }`,
-    //     status: "error",
-    //     duration: 9000,
-    //     isClosable: true,
-    //   });
-    // }
-    auth.setIsLoading(false);
+    try {
+      auth.setIsLoading(true);
+      if (location.pathname.split("/")[2] === "professional") {
+        const updateprofessional = await updateProfessional(id, credentials);
+        console.log(updateprofessional);
+
+        // const user = await signupProfessional(credentials);
+      } else {
+        const updateRe = await updateRecruiter(id, credentials);
+        console.log(updateRe);
+      }
+
+      toast({
+        title: `welcome ${credentials.name || userType}`,
+        description: "Your account has been created",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      auth.setIsLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
+  async function handleUser() {
+    try {
+      auth.setIsLoading(true);
+      if (location.pathname.split("/")[2] === "professional") {
+        const professional = await createProfessional();
+        console.log(professional);
+        setId(professional.id);
+        try {
+          const user = await signupProfessional(professional.id, credentials);
+          // auth.setUser(user);
+          // setStep(1);
+          console.log(user);
+          toast({
+            title: "Email validation",
+            description: "Nice email address",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
+          auth.setIsLoading(false);
+          setStep(1);
+          StepProgressData[0].status = "DONE!";
+          StepProgressData[1].status = "IN PROGRESS";
+        } catch (error) {
+          console.log(error);
+          toast({
+            title: "Error",
+            description:
+              error?.response?.data?.errors || "Something went wrong",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          auth.setIsLoading(false);
+        }
+        // const user = await signupProfessional(credentials);
+      } else {
+        const recruiter = await createRecruiter();
+        console.log(recruiter);
+        setId(recruiter.id);
+        try {
+          const user = await signupRecruiter(recruiter.id, credentials);
+          // auth.setUser(user);
+          // setStep(1);
+          console.log(user);
+          toast({
+            title: "Email validation",
+            description: "Nice email address",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
+          auth.setIsLoading(false);
+          setStep(1);
+          StepProgressData[0].status = "DONE!";
+          StepProgressData[1].status = "IN PROGRESS";
+        } catch (error) {
+          console.log(error);
+          toast({
+            title: "Error",
+            description:
+              error?.response?.data?.errors || "Something went wrong",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          auth.setIsLoading(false);
+        }
+      }
+
+      // setStep(step + 1);
+
+      auth.setIsLoading(false);
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   }
 
   const handleChange = (e) => {
@@ -139,14 +270,15 @@ export function SignupForm() {
         <Button
           bg={"blue.400"}
           color={"white"}
+          isDisabled={
+            !credentials.email ||
+            !credentials.password ||
+            credentials.password !== credentials.password_confirmation
+          }
           _hover={{
             bg: "blue.500",
           }}
-          onClick={() => {
-            setStep(1);
-            StepProgressData[0].status = "DONE!";
-            StepProgressData[1].status = "IN PROGRESS";
-          }}
+          onClick={handleUser}
           type="submit"
           isLoading={auth.isLoading}
         >
@@ -199,18 +331,15 @@ export function SignupForm() {
           />
         </FormControl>
       </Stack>
-      <Stack spacing={10}>
+      <Stack spacing={5}>
         <Stack
           direction={{ base: "column", sm: "row" }}
           align={"start"}
           justify={"space-between"}
+          gap="0"
         ></Stack>
         <Button
-          bg={"blue.400"}
-          color={"white"}
-          _hover={{
-            bg: "blue.500",
-          }}
+          colorScheme={"blue"}
           onClick={() => {
             setStep(2);
             StepProgressData[1].status = "DONE!";
@@ -220,6 +349,18 @@ export function SignupForm() {
           isLoading={auth.isLoading}
         >
           Next
+        </Button>
+        <Button
+          colorScheme={"gray"}
+          variant="ghost"
+          onClick={() => {
+            // reload page
+            window.location.reload();
+          }}
+          type="submit"
+          isLoading={auth.isLoading}
+        >
+          Skip
         </Button>
       </Stack>
     </>
@@ -272,8 +413,63 @@ export function SignupForm() {
           _hover={{
             bg: "blue.500",
           }}
-          onClick={() => setStep(2)}
-          type="submit"
+          onClick={handleUpdate}
+          isLoading={auth.isLoading}
+        >
+          Next
+        </Button>
+      </Stack>
+    </>
+  );
+
+  const step4 = (
+    <>
+      <Stack as={"form"} spacing={4}>
+        <FormControl id="name">
+          <FormLabel>Company name</FormLabel>
+          <Input
+            value={credentials.name}
+            name="name"
+            onChange={(e) => handleChange(e)}
+            type="text"
+            placeholder="My company S.A."
+          />
+        </FormControl>
+        <FormControl id="website">
+          <FormLabel>Company website</FormLabel>
+          <Input
+            value={credentials.website}
+            name="website"
+            onChange={(e) => handleChange(e)}
+            type="text"
+            placeholder="https://www.mycompany.sa"
+          />
+        </FormControl>
+
+        <FormControl id="description">
+          <FormLabel>About the company</FormLabel>
+          <Input
+            value={credentials.description}
+            name="description"
+            onChange={(e) => handleChange(e)}
+            type="text"
+            placeholder="About the company"
+          />
+        </FormControl>
+      </Stack>
+      <Stack spacing={10}>
+        <Stack
+          direction={{ base: "column", sm: "row" }}
+          align={"start"}
+          justify={"space-between"}
+        ></Stack>
+        <Button
+          bg={"blue.400"}
+          color={"white"}
+          _hover={{
+            bg: "blue.500",
+          }}
+          onClick={handleUpdate}
           isLoading={auth.isLoading}
         >
           Next
@@ -284,7 +480,13 @@ export function SignupForm() {
 
   return (
     <>
-      <StepProgress data={StepProgressData} />
+      <StepProgress
+        data={
+          userType === "Professional"
+            ? StepProgressData
+            : StepProgressDataRecruiter
+        }
+      />
       <Box
         rounded={"lg"}
         bg={useColorModeValue("white", "gray.700")}
@@ -292,8 +494,9 @@ export function SignupForm() {
         p={8}
       >
         {step === 0 && step1}
-        {step === 1 && step2}
-        {step === 2 && step3}
+        {step === 1 && userType === "Professional" && step2}
+        {step === 2 && userType === "Professional" && step3}
+        {step === 1 && userType === "Company" && step4}
       </Box>
     </>
   );

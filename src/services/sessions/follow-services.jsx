@@ -19,8 +19,22 @@ export async function followJob(id) {
 export async function unfollowJob(id) {
   const options = {
     method: "DELETE",
-    url: `${BASE_URI}/followings/${id}`,
+    url: `${BASE_URI}/followings/${parseInt(id)}`,
     Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+  };
+  const response = await axios.request(options);
+  // const { token, ...user } = response.data;
+
+  return response.data;
+}
+
+export async function indexfollow() {
+  const options = {
+    method: "GET",
+    url: `${BASE_URI}/followings`,
+    headers: {
+      Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    },
   };
   const response = await axios.request(options);
   // const { token, ...user } = response.data;
