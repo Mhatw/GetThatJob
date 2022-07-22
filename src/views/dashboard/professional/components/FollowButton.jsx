@@ -1,5 +1,5 @@
 import { Button, useToast } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import {

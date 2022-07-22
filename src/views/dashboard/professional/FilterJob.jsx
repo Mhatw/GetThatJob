@@ -29,7 +29,7 @@ export function FilterJob() {
             maxW={"96em"}
             overflowX={"scroll"}
           >
-            {data?.jobs.reverse().map((job) => (
+            {data?.jobs.map((job) => (
               <JobCard key={job.id} job={job} />
             ))}
           </SimpleGrid>

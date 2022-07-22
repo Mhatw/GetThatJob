@@ -1,13 +1,10 @@
 import { Box, Center, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useData } from "../../../context/dataContext";
 import { JobCard } from "./components";
 
 export function Following() {
-  const params = useParams();
   const data = useData();
-  const job = data.jobs.find((job) => job.id === parseInt(params?.id));
   const followingJobs = data?.jobs?.filter(
     (mapJob) => mapJob.following === true
   );

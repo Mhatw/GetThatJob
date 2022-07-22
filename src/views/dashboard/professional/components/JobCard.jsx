@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
-import { BiTargetLock } from "react-icons/bi";
 import { useAuth } from "../../../../services/auth";
 import { Link } from "react-router-dom";
 import { salaryString } from "../utilities";
@@ -39,6 +38,7 @@ export function JobCard({ job }) {
   ]);
 
   const salary = salaryString(job.salary_min, job.salary_max);
+  const posted = (new Date() - new Date(job.created_at)) / (1000 * 60);
   return (
     <Skeleton borderRadius={"lg"} isLoaded={!auth.isLoading} fadeDuration={2}>
       <Center
@@ -79,14 +79,16 @@ export function JobCard({ job }) {
             >
               <Text fontWeight={600} color={"gray.500"} size="sm" m={"0rem"}>
                 {job.category}
-                <Badge
-                  borderRadius={"0.4rem"}
-                  fontSize="0.5rem"
-                  colorScheme="purple"
-                  ml="0.5rem"
-                >
-                  New
-                </Badge>
+                {posted < 240 && (
+                  <Badge
+                    borderRadius={"0.4rem"}
+                    fontSize="0.5rem"
+                    colorScheme="purple"
+                    ml="0.5rem"
+                  >
+                    New
+                  </Badge>
+                )}
               </Text>
               <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
                 {job?.name}

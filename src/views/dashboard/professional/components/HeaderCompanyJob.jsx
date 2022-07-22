@@ -1,6 +1,5 @@
-import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import React from "react";
-import { BiTargetLock } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { FollowButton } from "./FollowButton";
 
