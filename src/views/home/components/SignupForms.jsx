@@ -6,6 +6,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Image,
   Input,
   Progress,
   SimpleGrid,
@@ -17,7 +18,7 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiFillAlert } from "react-icons/ai";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
@@ -72,6 +73,7 @@ export function SignupForm() {
   const toast = useToast();
   const [step, setStep] = useState(0);
   const [id, setId] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location.pathname.split("/")[2]);
@@ -94,7 +96,7 @@ export function SignupForm() {
 
         // const user = await signupProfessional(credentials);
       } else {
-        const updateRe = await updateRecruiter(id, credentials);
+        const updateRe = await updateRecruiter(id, credentials, imageFile);
         console.log(updateRe);
       }
 
@@ -178,8 +180,8 @@ export function SignupForm() {
 
           auth.setIsLoading(false);
           setStep(1);
-          StepProgressData[0].status = "DONE!";
-          StepProgressData[1].status = "IN PROGRESS";
+          StepProgressDataRecruiter[0].status = "DONE!";
+          StepProgressDataRecruiter[1].status = "IN PROGRESS";
         } catch (error) {
           console.log(error);
           toast({
@@ -445,7 +447,6 @@ export function SignupForm() {
             placeholder="https://www.mycompany.sa"
           />
         </FormControl>
-
         <FormControl id="description">
           <FormLabel>About the company</FormLabel>
           <Input
@@ -456,6 +457,21 @@ export function SignupForm() {
             placeholder="About the company"
           />
         </FormControl>
+        <div className="file-select">
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setImageFile(e.target.files[0]);
+              console.log(e.target.files[0]);
+            }}
+          />
+        </div>
+        {imageFile && (
+          <Tag colorScheme={"green"} w="100px">
+            uploaded ✅
+          </Tag>
+        )}
       </Stack>
       <Stack spacing={10}>
         <Stack
