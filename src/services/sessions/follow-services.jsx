@@ -20,7 +20,9 @@ export async function unfollowJob(id) {
   const options = {
     method: "DELETE",
     url: `${BASE_URI}/followings/${parseInt(id)}`,
-    Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    headers: {
+      Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    },
   };
   const response = await axios.request(options);
   // const { token, ...user } = response.data;

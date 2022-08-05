@@ -13,12 +13,13 @@ export function FollowButton({ job }) {
   const auth = useAuth();
   const data = useData();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const handleFollow = async () => {
-    auth.setIsLoading(true);
+    setIsLoading(true);
     try {
       await followJob(job.id);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       setIsFollowing(!isFollowing);
       data.jobs?.forEach((e) => {
         if (e.id === job.id) {
@@ -28,7 +29,7 @@ export function FollowButton({ job }) {
       console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       toast({
         title: "Error following job",
         status: "error",
@@ -41,7 +42,7 @@ export function FollowButton({ job }) {
     }
   };
   const handleUnfollow = async () => {
-    auth.setIsLoading(true);
+    setIsLoading(true);
     try {
       const follows = await indexfollow();
       console.log(follows, "follows");
@@ -50,7 +51,7 @@ export function FollowButton({ job }) {
       try {
         const followId = follows?.find((e) => e.job_id === job.id).id;
         await unfollowJob(followId);
-        auth.setIsLoading(false);
+        setIsLoading(false);
         setIsFollowing(!isFollowing);
         data.jobs?.forEach((e) => {
           if (e.id === job.id) {
@@ -59,7 +60,7 @@ export function FollowButton({ job }) {
         });
       } catch (error) {
         console.log(error);
-        auth.setIsLoading(false);
+        setIsLoading(false);
         toast({
           title: "Error unfollowing job",
           status: "error",
@@ -71,7 +72,7 @@ export function FollowButton({ job }) {
       console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       toast({
         title: "Error following job",
         status: "error",
@@ -94,7 +95,7 @@ export function FollowButton({ job }) {
 
   return (
     <Button
-      isLoading={auth.isLoading}
+      isLoading={isLoading}
       fontSize={"sm"}
       colorScheme={isFollowing ? "orange" : "gray"}
       variant={isFollowing ? "solid" : "ghost"}
