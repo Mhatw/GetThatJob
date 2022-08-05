@@ -12,6 +12,14 @@ import {
   Link as ChakraLink,
   Textarea,
   useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,6 +30,7 @@ import { updateRecruiter } from "../../services/sessions/recruiter-services";
 
 export function Profile() {
   const auth = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   console.log(auth.user);
   return (
     <>
@@ -143,6 +152,59 @@ export function Profile() {
                 {auth.user?.education || "No information"}
               </Text>
             </Box>
+            {auth.user?.cv_url && (
+              <Box w="100%" display="flex" gap="1rem" alignItems="center">
+                <Button onClick={onOpen} colorScheme="green">
+                  View CV
+                </Button>
+
+                <iframe
+                  // as={"box"}
+                  title="cv"
+                  className="withoutScrollbar"
+                  src={auth.user?.cv_url}
+                  frameborder="0"
+                  style={{
+                    width: "90px",
+                    height: "90px",
+                    border: "none",
+                  }}
+                  // w="400px"
+                ></iframe>
+                <Modal
+                  isCentered
+                  onClose={onClose}
+                  isOpen={isOpen}
+                  motionPreset="slideInBottom"
+                  size="full"
+                  // m="2rem"
+                >
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Curriculum vitae</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody
+                      display="flex"
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                    >
+                      <iframe
+                        // as={"box"}
+                        title="cv"
+                        src={auth.user?.cv_url}
+                        frameborder="0"
+                        style={{
+                          width: "90vw",
+                          height: "90vh",
+                          border: "none",
+                        }}
+                        // w="400px"
+                      ></iframe>
+                    </ModalBody>
+                  </ModalContent>
+                </Modal>
+              </Box>
+            )}
           </Flex>
         </Flex>
       )}

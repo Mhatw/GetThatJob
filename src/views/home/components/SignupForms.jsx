@@ -74,6 +74,7 @@ export function SignupForm() {
   const [step, setStep] = useState(0);
   const [id, setId] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [cvFile, setCvFile] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location.pathname.split("/")[2]);
@@ -91,8 +92,12 @@ export function SignupForm() {
     try {
       auth.setIsLoading(true);
       if (location.pathname.split("/")[2] === "professional") {
-        const updateprofessional = await updateProfessional(id, credentials);
-        console.log(updateprofessional);
+        const updateprofessional = await updateProfessional(
+          id,
+          credentials,
+          cvFile
+        );
+        console.log(updateprofessional, "hereeeee");
 
         // const user = await signupProfessional(credentials);
       } else {
@@ -403,12 +408,27 @@ export function SignupForm() {
           />
         </FormControl>
       </Stack>
-      <Stack spacing={10}>
+      <Stack spacing={5}>
         <Stack
           direction={{ base: "column", sm: "row" }}
           align={"start"}
           justify={"space-between"}
         ></Stack>
+        <div className="file-select2">
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setCvFile(e.target.files[0]);
+              console.log(e.target.files[0]);
+            }}
+          />
+        </div>
+        {cvFile && (
+          <Tag colorScheme={"green"} w="100px" mt="-2rem">
+            uploaded ✅
+          </Tag>
+        )}
         <Button
           bg={"blue.400"}
           color={"white"}
