@@ -18,7 +18,7 @@ import { useAuth } from "../../../../services/auth";
 import { postedString, salaryString } from "../utilities";
 
 export function ApplyCard({ apply }) {
-  const auth = useAuth();
+  // const auth = useAuth();
   return (
     <AccordionItem bg={"white"} key={apply?.id}>
       <AccordionButton key={apply?.created_at}>
@@ -106,7 +106,7 @@ export function ApplyCard({ apply }) {
             Professional experience
           </Heading>
           <Text fontSize={"1rem"} color="gray.900" fontWeight={"400"}>
-            {auth.user?.experience || "No description"}
+            {apply?.experience || "No description"}
           </Text>
         </Flex>
         <Flex

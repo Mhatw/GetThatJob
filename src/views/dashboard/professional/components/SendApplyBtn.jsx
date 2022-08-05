@@ -40,6 +40,7 @@ export function SendApplyBtn({ id, app }) {
         message: app?.message || "no message",
         job_id: parseInt(id),
         status_id: 1,
+        experience: app?.experience || "no experience",
       },
     };
     try {
