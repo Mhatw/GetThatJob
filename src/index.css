@@ -20,6 +20,10 @@ code {
   width: 0.3em;
   width: 0.3em;
 }
+.withoutScrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
 *::-webkit-scrollbar-track {
   background-color: rgba(255, 255, 255, 0);
@@ -29,4 +33,52 @@ code {
 *::-webkit-scrollbar-thumb {
   background-color: #111111;
   border-radius: 0.625rem;
+}
+
+.file-select,
+.file-select2 {
+  position: relative;
+  display: inline-block;
+}
+.file-select::before {
+  background-color: #000000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4rem;
+  content: "+ subir logo";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select2::before {
+  background-color: #000000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4rem;
+  content: "+ subir cv";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select2 input[type="file"] {
+  opacity: 0;
+  width: 200px;
+  height: 32px;
+  display: inline-block;
+}
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 200px;
+  height: 32px;
+  display: inline-block;
 }

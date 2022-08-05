@@ -10,7 +10,6 @@ export async function indexCategories() {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }

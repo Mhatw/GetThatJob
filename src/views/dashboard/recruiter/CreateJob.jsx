@@ -41,7 +41,7 @@ export function CreateJob() {
       const res = await createJob(profile);
       auth.setIsLoading(false);
       data.setJobs([res, ...data.jobs]);
-      console.log(data.jobs);
+
       toast({
         title: "Job created successfully",
         status: "success",
@@ -64,7 +64,7 @@ export function CreateJob() {
       }
     }
   };
-  console.log(profile);
+
   return (
     <>
       <Flex
@@ -89,7 +89,6 @@ export function CreateJob() {
           px={"2rem"}
           py={"1rem"}
         >
-          {/* noOfLines={1} */}
           <Heading size="md" color="gray.900">
             Main information
           </Heading>

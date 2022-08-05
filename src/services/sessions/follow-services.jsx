@@ -12,7 +12,6 @@ export async function followJob(id) {
     data: { following: { job_id: id } },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
@@ -20,10 +19,11 @@ export async function unfollowJob(id) {
   const options = {
     method: "DELETE",
     url: `${BASE_URI}/followings/${parseInt(id)}`,
-    Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    headers: {
+      Authorization: `Token token=${sessionStorage.getItem(tokenKey)}`,
+    },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
@@ -37,7 +37,6 @@ export async function indexfollow() {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }

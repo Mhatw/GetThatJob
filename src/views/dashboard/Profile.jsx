@@ -11,15 +11,26 @@ import {
   Text,
   Link as ChakraLink,
   Textarea,
+  useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BackButton } from "../../components";
 import { useAuth } from "../../services/auth";
+import { updateProfessional } from "../../services/sessions/professional-services";
+import { updateRecruiter } from "../../services/sessions/recruiter-services";
 
 export function Profile() {
   const auth = useAuth();
-  console.log(auth.user);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       {/* proffesional */}
@@ -53,18 +64,10 @@ export function Profile() {
             px={"2rem"}
             py={"1rem"}
           >
-            {/* noOfLines={1} */}
             <Heading size="md" color="gray.900">
               Personal information
             </Heading>
-            {/* <Box w="100%">
-            <Heading size="sm" color="gray.900">
-              Email:
-            </Heading>
-            <Text fontSize="sm" fontWeight="500">
-              {auth.user?.email}
-            </Text>
-          </Box> */}
+
             <Box w="100%">
               <Heading size="sm" color="gray.900">
                 Name:
@@ -93,13 +96,7 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Linkedin url:
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.linkedin_url}
               </Text>
             </Box>
@@ -115,13 +112,7 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Professional Experience
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.experience || "No information"}
               </Text>
             </Box>
@@ -129,17 +120,58 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Education
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.education || "No information"}
               </Text>
             </Box>
+            {auth.user?.cv_url && (
+              <Box w="100%" display="flex" gap="1rem" alignItems="center">
+                <Button onClick={onOpen} colorScheme="green">
+                  View CV
+                </Button>
+
+                <iframe
+                  title="cv"
+                  className="withoutScrollbar"
+                  src={auth.user?.cv_url}
+                  frameborder="0"
+                  style={{
+                    width: "90px",
+                    height: "90px",
+                    border: "none",
+                  }}
+                ></iframe>
+                <Modal
+                  isCentered
+                  onClose={onClose}
+                  isOpen={isOpen}
+                  motionPreset="slideInBottom"
+                  size="full"
+                >
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Curriculum vitae</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody
+                      display="flex"
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                    >
+                      <iframe
+                        title="cv"
+                        src={auth.user?.cv_url}
+                        frameborder="0"
+                        style={{
+                          width: "90vw",
+                          height: "90vh",
+                          border: "none",
+                        }}
+                      ></iframe>
+                    </ModalBody>
+                  </ModalContent>
+                </Modal>
+              </Box>
+            )}
           </Flex>
         </Flex>
       )}
@@ -177,7 +209,7 @@ export function Profile() {
             py={"1rem"}
           >
             <Box>
-              <Heading size="sm" color="gray.900">
+              <Heading size="sm" color="gray.900" mb="2rem">
                 Company Logo
               </Heading>
               <Image
@@ -204,9 +236,6 @@ export function Profile() {
               <ChakraLink href={auth.user?.website} isExternal>
                 {auth.user?.website} <ExternalLinkIcon mx="2px" />
               </ChakraLink>
-              {/* <Text fontSize="sm" fontWeight="500">
-                {auth.user?.website}
-              </Text> */}
             </Box>
             <Box w="100%">
               <Heading size="sm" color="gray.900">
@@ -237,6 +266,8 @@ export function Profile() {
 
 export function EditProfile() {
   const auth = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
   const [profile, setProfile] = React.useState({
     name: auth.user?.name,
     phone: auth.user?.phone,
@@ -251,7 +282,42 @@ export function EditProfile() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(profile);
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      auth.setIsLoading(true);
+      await updateProfessional(auth?.user?.id, profile);
+
+      auth.user.name = profile.name;
+      auth.user.phone = profile.phone;
+      auth.user.birth_date = profile.birth_date;
+      auth.user.linkedin_url = profile.linkedin_url;
+      auth.user.experience = profile.experience;
+      auth.user.education = profile.education;
+
+      toast({
+        title: `data updated`,
+        description: "your data has been updated",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      auth.setIsLoading(false);
+      navigate("/dashboard/professional/profile");
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <>
       {/* proffesional */}
@@ -280,7 +346,6 @@ export function EditProfile() {
           px={"2rem"}
           py={"1rem"}
         >
-          {/* noOfLines={1} */}
           <Heading size="md" color="gray.900">
             Personal information
           </Heading>
@@ -379,6 +444,7 @@ export function EditProfile() {
           colorScheme={"blue"}
           mt="1rem"
           mb="4rem"
+          onClick={handleUpdate}
         >
           Edit Profile
         </Button>
@@ -389,6 +455,8 @@ export function EditProfile() {
 
 export function EditProfileRecruiter() {
   const auth = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
   const [profile, setProfile] = React.useState({
     name: auth.user?.name,
     website: auth.user?.website,
@@ -400,7 +468,39 @@ export function EditProfileRecruiter() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(profile);
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      auth.setIsLoading(true);
+      await updateRecruiter(auth?.user?.id, profile);
+
+      auth.user.name = profile.name;
+      auth.user.website = profile.website;
+      auth.user.description = profile.description;
+
+      toast({
+        title: `data updated`,
+        description: "your data has been updated",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      auth.setIsLoading(false);
+      navigate("/dashboard/recruiter/profile");
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
   return (
     <>
       <Flex
@@ -431,7 +531,7 @@ export function EditProfileRecruiter() {
           py={"1rem"}
         >
           <Box>
-            <Heading size="sm" color="gray.900">
+            <Heading size="sm" color="gray.900" mb="2rem">
               Company Logo
             </Heading>
             <Image
@@ -468,10 +568,6 @@ export function EditProfileRecruiter() {
               value={profile.website}
               onChange={handleChange}
             ></Input>
-
-            {/* <Text fontSize="sm" fontWeight="500">
-                {auth.user?.website}
-              </Text> */}
           </Box>
           <Box w="100%">
             <Heading size="sm" color="gray.900">
@@ -483,7 +579,7 @@ export function EditProfileRecruiter() {
               name="description"
               type="text"
               h={"200px"}
-              value={profile.description}
+              value={profile.description || ""}
               onChange={handleChange}
             ></Textarea>
           </Box>
@@ -498,6 +594,7 @@ export function EditProfileRecruiter() {
           colorScheme={"blue"}
           mt="1rem"
           mb="4rem"
+          onClick={handleUpdate}
         >
           Edit Profile
         </Button>

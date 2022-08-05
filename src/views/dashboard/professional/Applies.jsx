@@ -27,7 +27,7 @@ export function Applies() {
           (apply) => apply?.status?.route === params?.category
         )
       : data?.applies;
-  console.log(selectApplies, "selectApplies");
+
   const HandleFilter = (e) => {
     navigate(`/dashboard/professional/applies/${e.target.value}`);
   };

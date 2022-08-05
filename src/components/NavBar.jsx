@@ -20,10 +20,7 @@ export function NavBar({ data }) {
       flexDirection={"column"}
       gap={"1rem"}
       justifyContent="flex-start"
-      // px={"2rem"}
-
       py={"2rem"}
-      // border="2px"
       height="100%"
       width="100%"
     >

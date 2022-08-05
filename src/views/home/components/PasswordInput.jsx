@@ -15,10 +15,7 @@ export function PasswordInput({ name, id, value, ...props }) {
   return (
     <FormControl id={id}>
       <FormLabel>{name}</FormLabel>
-      {/* <PasswordInput
-            name="password"
-            onChange={(e) => handleChange(e)}
-          /> */}
+
       <InputGroup size="md">
         <Input
           pr="4.5rem"

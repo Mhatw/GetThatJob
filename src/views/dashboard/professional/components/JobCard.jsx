@@ -21,9 +21,7 @@ import { Link } from "react-router-dom";
 import { salaryString } from "../utilities";
 import { FollowButton } from "./FollowButton";
 export function JobCard({ job }) {
-  // funtion for transform money to abbreviated
   const auth = useAuth();
-  // function for random element in array
   const randomElement = (array) => {
     return array[Math.floor(Math.random() * array.length)];
   };

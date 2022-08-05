@@ -1,25 +1,20 @@
 import {
   Box,
   Button,
-  Center,
-  Circle,
-  Flex,
   FormControl,
   FormLabel,
   Input,
   Progress,
-  SimpleGrid,
   Stack,
   Tag,
   TagLabel,
   TagLeftIcon,
-  Text,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiFillAlert } from "react-icons/ai";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
 import {
   createProfessional,
@@ -33,7 +28,6 @@ import {
   signupProfessional,
   signupRecruiter,
 } from "../../../services/sessions/user-services";
-import FileUpload from "./FileUpload";
 import { PasswordInput } from "./PasswordInput";
 import { StepProgress } from "./StepProgress";
 
@@ -72,9 +66,10 @@ export function SignupForm() {
   const toast = useToast();
   const [step, setStep] = useState(0);
   const [id, setId] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [cvFile, setCvFile] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
-  console.log(location.pathname.split("/")[2]);
+
   const userType =
     location.pathname.split("/")[2] === "professional"
       ? "Professional"
@@ -89,13 +84,11 @@ export function SignupForm() {
     try {
       auth.setIsLoading(true);
       if (location.pathname.split("/")[2] === "professional") {
-        const updateprofessional = await updateProfessional(id, credentials);
-        console.log(updateprofessional);
+        await updateProfessional(id, credentials, cvFile);
 
         // const user = await signupProfessional(credentials);
       } else {
-        const updateRe = await updateRecruiter(id, credentials);
-        console.log(updateRe);
+        await updateRecruiter(id, credentials, imageFile);
       }
 
       toast({
@@ -127,13 +120,11 @@ export function SignupForm() {
       auth.setIsLoading(true);
       if (location.pathname.split("/")[2] === "professional") {
         const professional = await createProfessional();
-        console.log(professional);
+
         setId(professional.id);
         try {
-          const user = await signupProfessional(professional.id, credentials);
-          // auth.setUser(user);
-          // setStep(1);
-          console.log(user);
+          await signupProfessional(professional.id, credentials);
+
           toast({
             title: "Email validation",
             description: "Nice email address",
@@ -158,16 +149,13 @@ export function SignupForm() {
           });
           auth.setIsLoading(false);
         }
-        // const user = await signupProfessional(credentials);
       } else {
         const recruiter = await createRecruiter();
-        console.log(recruiter);
+
         setId(recruiter.id);
         try {
-          const user = await signupRecruiter(recruiter.id, credentials);
-          // auth.setUser(user);
-          // setStep(1);
-          console.log(user);
+          await signupRecruiter(recruiter.id, credentials);
+
           toast({
             title: "Email validation",
             description: "Nice email address",
@@ -178,8 +166,8 @@ export function SignupForm() {
 
           auth.setIsLoading(false);
           setStep(1);
-          StepProgressData[0].status = "DONE!";
-          StepProgressData[1].status = "IN PROGRESS";
+          StepProgressDataRecruiter[0].status = "DONE!";
+          StepProgressDataRecruiter[1].status = "IN PROGRESS";
         } catch (error) {
           console.log(error);
           toast({
@@ -221,7 +209,6 @@ export function SignupForm() {
     (credentials.password.match(/[0-9]/g) ? 15 : 0) +
     (credentials.password.match(/[A-Z]/g) ? 15 : 0);
   const progressColor = value < 30 ? "red" : value < 60 ? "yellow" : "green";
-  console.log(credentials);
 
   const step1 = (
     <>
@@ -401,12 +388,26 @@ export function SignupForm() {
           />
         </FormControl>
       </Stack>
-      <Stack spacing={10}>
+      <Stack spacing={5}>
         <Stack
           direction={{ base: "column", sm: "row" }}
           align={"start"}
           justify={"space-between"}
         ></Stack>
+        <div className="file-select2">
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setCvFile(e.target.files[0]);
+            }}
+          />
+        </div>
+        {cvFile && (
+          <Tag colorScheme={"green"} w="100px" mt="-2rem">
+            uploaded ✅
+          </Tag>
+        )}
         <Button
           bg={"blue.400"}
           color={"white"}
@@ -445,7 +446,6 @@ export function SignupForm() {
             placeholder="https://www.mycompany.sa"
           />
         </FormControl>
-
         <FormControl id="description">
           <FormLabel>About the company</FormLabel>
           <Input
@@ -456,6 +456,20 @@ export function SignupForm() {
             placeholder="About the company"
           />
         </FormControl>
+        <div className="file-select">
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setImageFile(e.target.files[0]);
+            }}
+          />
+        </div>
+        {imageFile && (
+          <Tag colorScheme={"green"} w="100px">
+            uploaded ✅
+          </Tag>
+        )}
       </Stack>
       <Stack spacing={10}>
         <Stack

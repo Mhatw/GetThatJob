@@ -13,22 +13,22 @@ export function FollowButton({ job }) {
   const auth = useAuth();
   const data = useData();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const handleFollow = async () => {
-    auth.setIsLoading(true);
+    setIsLoading(true);
     try {
       await followJob(job.id);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       setIsFollowing(!isFollowing);
       data.jobs?.forEach((e) => {
         if (e.id === job.id) {
           e.following = !isFollowing;
         }
       });
-      console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       toast({
         title: "Error following job",
         status: "error",
@@ -41,16 +41,14 @@ export function FollowButton({ job }) {
     }
   };
   const handleUnfollow = async () => {
-    auth.setIsLoading(true);
+    setIsLoading(true);
     try {
       const follows = await indexfollow();
-      console.log(follows, "follows");
-      console.log(job.id, "job.id");
-      console.log(follows?.find((e) => e.job_id === job.id).id, "aaaaaaaaa");
+
       try {
         const followId = follows?.find((e) => e.job_id === job.id).id;
         await unfollowJob(followId);
-        auth.setIsLoading(false);
+        setIsLoading(false);
         setIsFollowing(!isFollowing);
         data.jobs?.forEach((e) => {
           if (e.id === job.id) {
@@ -59,7 +57,7 @@ export function FollowButton({ job }) {
         });
       } catch (error) {
         console.log(error);
-        auth.setIsLoading(false);
+        setIsLoading(false);
         toast({
           title: "Error unfollowing job",
           status: "error",
@@ -67,20 +65,15 @@ export function FollowButton({ job }) {
           isClosable: true,
         });
       }
-
-      console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
-      auth.setIsLoading(false);
+      setIsLoading(false);
       toast({
         title: "Error following job",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
-      // if (error?.response?.data?.unauthorized) {
-      //   auth.setUser(null);
-      // }
     }
   };
 
@@ -88,20 +81,16 @@ export function FollowButton({ job }) {
     setIsFollowing(job?.following);
   });
 
-  // useEffect(() => {
-
-  // }, [isFollowing, data.jobs, job.id]);
-
   return (
     <Button
-      isLoading={auth.isLoading}
+      isLoading={isLoading}
       fontSize={"sm"}
       colorScheme={isFollowing ? "orange" : "gray"}
-      variant={isFollowing ? "solid" : "ghost"}
+      variant={isFollowing ? "solid" : "outline"}
       leftIcon={<BiTargetLock />}
       onClick={isFollowing ? handleUnfollow : handleFollow}
     >
-      {isFollowing && <span>Following</span>}
+      {isFollowing && <span>Following &nbsp;&nbsp; </span>}
       {!isFollowing && <span>Follow job</span>}
     </Button>
   );

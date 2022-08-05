@@ -9,7 +9,7 @@ export async function login(credentials) {
     data: credentials,
   };
   const response = await axios.request(options);
-  console.log(response);
+
   const { token, ...user } = response.data;
   sessionStorage.setItem(tokenKey, token);
   return user;
@@ -24,7 +24,7 @@ export async function logout() {
     },
   };
   const response = await axios.request(options);
-  console.log(response);
+
   sessionStorage.removeItem(tokenKey);
   return response.data;
 }

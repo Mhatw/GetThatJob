@@ -10,12 +10,17 @@ import React from "react";
 import { useParams } from "react-router";
 import { BackButton } from "../../../components";
 import { useData } from "../../../context/dataContext";
+import { useAuth } from "../../../services/auth";
 import { HeaderCompanyJob, SendApplyBtn, TitleJob } from "./components";
 
 export function JobApply() {
   const params = useParams();
   const data = useData();
-  const [apply, setApply] = React.useState({});
+  const auth = useAuth();
+  const [apply, setApply] = React.useState({
+    experience: auth.user?.experience,
+    message: "",
+  });
   const job = data.jobs.find((job) => job.id === parseInt(params?.id));
   const handleChange = (e) => {
     setApply({
@@ -23,7 +28,7 @@ export function JobApply() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(apply, "applyy");
+
   return (
     <Flex pt="1rem" pb="3rem" minH="100vh" justifyContent={"center"}>
       <Box maxW={"60em"}>
@@ -52,7 +57,8 @@ export function JobApply() {
               resize={"vertical"}
               name="experience"
               id={"experience"}
-              value={apply.experience}
+              value={apply.experience || ""}
+              bg="white"
               onChange={(e) => handleChange(e)}
             />
             <FormLabel>
@@ -64,6 +70,7 @@ export function JobApply() {
               resize={"vertical"}
               name="message"
               id={"message"}
+              bg="white"
               value={apply.message}
               onChange={(e) => handleChange(e)}
             />
