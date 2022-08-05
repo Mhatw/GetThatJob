@@ -11,11 +11,14 @@ import {
   Text,
   Link as ChakraLink,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BackButton } from "../../components";
 import { useAuth } from "../../services/auth";
+import { updateProfessional } from "../../services/sessions/professional-services";
+import { updateRecruiter } from "../../services/sessions/recruiter-services";
 
 export function Profile() {
   const auth = useAuth();
@@ -177,7 +180,7 @@ export function Profile() {
             py={"1rem"}
           >
             <Box>
-              <Heading size="sm" color="gray.900">
+              <Heading size="sm" color="gray.900" mb="2rem">
                 Company Logo
               </Heading>
               <Image
@@ -237,6 +240,8 @@ export function Profile() {
 
 export function EditProfile() {
   const auth = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
   const [profile, setProfile] = React.useState({
     name: auth.user?.name,
     phone: auth.user?.phone,
@@ -251,6 +256,45 @@ export function EditProfile() {
       [e.target.name]: e.target.value,
     });
   };
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      auth.setIsLoading(true);
+      const updateprofessional = await updateProfessional(
+        auth?.user?.id,
+        profile
+      );
+
+      auth.user.name = profile.name;
+      auth.user.phone = profile.phone;
+      auth.user.birth_date = profile.birth_date;
+      auth.user.linkedin_url = profile.linkedin_url;
+      auth.user.experience = profile.experience;
+      auth.user.education = profile.education;
+
+      toast({
+        title: `data updated`,
+        description: "your data has been updated",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      auth.setIsLoading(false);
+      navigate("/dashboard/professional/profile");
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
   console.log(profile);
   return (
     <>
@@ -379,6 +423,7 @@ export function EditProfile() {
           colorScheme={"blue"}
           mt="1rem"
           mb="4rem"
+          onClick={handleUpdate}
         >
           Edit Profile
         </Button>
@@ -389,6 +434,8 @@ export function EditProfile() {
 
 export function EditProfileRecruiter() {
   const auth = useAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
   const [profile, setProfile] = React.useState({
     name: auth.user?.name,
     website: auth.user?.website,
@@ -400,6 +447,40 @@ export function EditProfileRecruiter() {
       [e.target.name]: e.target.value,
     });
   };
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      auth.setIsLoading(true);
+      const updateRe = await updateRecruiter(auth?.user?.id, profile);
+      console.log(updateRe);
+
+      auth.user.name = profile.name;
+      auth.user.website = profile.website;
+      auth.user.description = profile.description;
+
+      toast({
+        title: `data updated`,
+        description: "your data has been updated",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      auth.setIsLoading(false);
+      navigate("/dashboard/recruiter/profile");
+    } catch (error) {
+      auth.setIsLoading(false);
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }
+
   console.log(profile);
   return (
     <>
@@ -431,7 +512,7 @@ export function EditProfileRecruiter() {
           py={"1rem"}
         >
           <Box>
-            <Heading size="sm" color="gray.900">
+            <Heading size="sm" color="gray.900" mb="2rem">
               Company Logo
             </Heading>
             <Image
@@ -498,6 +579,7 @@ export function EditProfileRecruiter() {
           colorScheme={"blue"}
           mt="1rem"
           mb="4rem"
+          onClick={handleUpdate}
         >
           Edit Profile
         </Button>
