@@ -24,17 +24,15 @@ export function SendApplyBtn({ id, app }) {
   const auth = useAuth();
   const data = useData();
   const navigate = useNavigate();
-  console.log(data.applies, "data.applies", parseInt(id));
+
   useEffect(() => {
     if (
       data.applies.filter((apply) => apply.job_id === parseInt(id)).length > 0
     ) {
       setBool(true);
     }
-    console.log(bool, "bool");
   }, [data.applies, bool, id]);
   const sendApplication = async () => {
-    console.log(app, "app");
     const application = {
       application: {
         message: app?.message || "no message",
@@ -45,7 +43,7 @@ export function SendApplyBtn({ id, app }) {
     };
     try {
       const res = await createApplications(application);
-      console.log(res, "res");
+
       data.applies.push(res);
       navigate("/");
       toast({
@@ -75,7 +73,6 @@ export function SendApplyBtn({ id, app }) {
       <Button
         colorScheme={"orange"}
         onClick={onOpen}
-        // onClick={sendApplication}
         isDisabled={bool}
         isLoading={auth.isLoading}
       >

@@ -14,11 +14,9 @@ import {
 import React from "react";
 import { BiMessageAltDots } from "react-icons/bi";
 import { FiSend } from "react-icons/fi";
-import { useAuth } from "../../../../services/auth";
 import { postedString, salaryString } from "../utilities";
 
 export function ApplyCard({ apply }) {
-  // const auth = useAuth();
   return (
     <AccordionItem bg={"white"} key={apply?.id}>
       <AccordionButton key={apply?.created_at}>

@@ -10,26 +10,15 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import React from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import { useParams, useLocation } from "react-router";
 import { useData } from "../../../context/dataContext";
 import { PostingCard } from "./components";
 
 export function PostCategory() {
   const params = useParams();
-  const navigate = useNavigate();
   const data = useData();
   const location = useLocation();
 
-  // const selectApplies =
-  //   params?.category !== "all"
-  //     ? data?.applies.filter(
-  //         (apply) => apply?.status?.route === params?.category
-  //       )
-  //     : data?.applies;
-  // console.log(selectApplies, "selectApplies");
-  // const HandleFilter = (e) => {
-  //   navigate(`/dashboard/professional/applies/${e.target.value}`);
-  // };
   return (
     <>
       <Flex w={"100%"} justifyContent="center">
@@ -42,7 +31,6 @@ export function PostCategory() {
               <MenuItem
                 key={"all"}
                 isDisabled={location.pathname.match("all")}
-                // onClick={HandleFilter}
                 value={"all"}
               >
                 {"All"}
@@ -52,7 +40,6 @@ export function PostCategory() {
                   <MenuItem
                     key={status.id}
                     isDisabled={location.pathname.match(status.route)}
-                    // onClick={HandleFilter}
                     value={status.route}
                   >
                     {status.name}

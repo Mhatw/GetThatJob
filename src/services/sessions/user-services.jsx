@@ -11,7 +11,6 @@ export async function getUser() {
   };
   const response = await axios.request(options);
   const { ...user } = response.data;
-  // sessionStorage.setItem(tokenKey, token);
   return user;
 }
 

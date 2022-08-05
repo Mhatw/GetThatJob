@@ -6,18 +6,11 @@ import {
   Text,
   useColorModeValue,
   useTheme,
-  // Hide,
 } from "@chakra-ui/react";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
-// import { LoginSvg } from "./components/svg/LoginSvg";
+import { NavLink, Outlet } from "react-router-dom";
 
 export function Login() {
   const theme = useTheme();
-  const userType = useLocation().pathname.split("/")[2];
-
-  console.log(userType);
-
-  console.log(userType);
 
   return (
     <>
@@ -73,14 +66,6 @@ export function Login() {
           <Outlet />
         </Stack>
       </Flex>
-      {/* <Hide below="md">
-        <Flex w={"full"}>
-          <LoginSvg
-            height={{ sm: "24rem", lg: "20rem" }}
-            mt={{ base: 12, sm: 16 }}
-          />
-        </Flex>
-      </Hide> */}
     </>
   );
 }

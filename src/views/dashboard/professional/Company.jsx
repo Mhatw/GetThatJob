@@ -12,7 +12,6 @@ export function Company() {
   const companiesJobs = data.jobs.filter(
     (mapJob) => mapJob.company.id === job.company.id
   );
-  console.log(companiesJobs, "companiesJobs");
 
   return (
     <Flex flexDirection={"column"}>

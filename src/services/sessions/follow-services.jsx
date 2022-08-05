@@ -12,7 +12,6 @@ export async function followJob(id) {
     data: { following: { job_id: id } },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
@@ -25,7 +24,6 @@ export async function unfollowJob(id) {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
@@ -39,7 +37,6 @@ export async function indexfollow() {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }

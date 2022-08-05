@@ -18,7 +18,6 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
@@ -31,7 +30,7 @@ import { updateRecruiter } from "../../services/sessions/recruiter-services";
 export function Profile() {
   const auth = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(auth.user);
+
   return (
     <>
       {/* proffesional */}
@@ -65,18 +64,10 @@ export function Profile() {
             px={"2rem"}
             py={"1rem"}
           >
-            {/* noOfLines={1} */}
             <Heading size="md" color="gray.900">
               Personal information
             </Heading>
-            {/* <Box w="100%">
-            <Heading size="sm" color="gray.900">
-              Email:
-            </Heading>
-            <Text fontSize="sm" fontWeight="500">
-              {auth.user?.email}
-            </Text>
-          </Box> */}
+
             <Box w="100%">
               <Heading size="sm" color="gray.900">
                 Name:
@@ -105,13 +96,7 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Linkedin url:
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.linkedin_url}
               </Text>
             </Box>
@@ -127,13 +112,7 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Professional Experience
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.experience || "No information"}
               </Text>
             </Box>
@@ -141,14 +120,7 @@ export function Profile() {
               <Heading size="sm" color="gray.900">
                 Education
               </Heading>
-              <Text
-                fontSize="sm"
-                fontWeight="500"
-                whiteSpace="wrap"
-                // w="80%"
-
-                // wordWrap="break-word"
-              >
+              <Text fontSize="sm" fontWeight="500" whiteSpace="wrap">
                 {auth.user?.education || "No information"}
               </Text>
             </Box>
@@ -159,7 +131,6 @@ export function Profile() {
                 </Button>
 
                 <iframe
-                  // as={"box"}
                   title="cv"
                   className="withoutScrollbar"
                   src={auth.user?.cv_url}
@@ -169,7 +140,6 @@ export function Profile() {
                     height: "90px",
                     border: "none",
                   }}
-                  // w="400px"
                 ></iframe>
                 <Modal
                   isCentered
@@ -177,7 +147,6 @@ export function Profile() {
                   isOpen={isOpen}
                   motionPreset="slideInBottom"
                   size="full"
-                  // m="2rem"
                 >
                   <ModalOverlay />
                   <ModalContent>
@@ -189,7 +158,6 @@ export function Profile() {
                       justifyContent={"center"}
                     >
                       <iframe
-                        // as={"box"}
                         title="cv"
                         src={auth.user?.cv_url}
                         frameborder="0"
@@ -198,7 +166,6 @@ export function Profile() {
                           height: "90vh",
                           border: "none",
                         }}
-                        // w="400px"
                       ></iframe>
                     </ModalBody>
                   </ModalContent>
@@ -269,9 +236,6 @@ export function Profile() {
               <ChakraLink href={auth.user?.website} isExternal>
                 {auth.user?.website} <ExternalLinkIcon mx="2px" />
               </ChakraLink>
-              {/* <Text fontSize="sm" fontWeight="500">
-                {auth.user?.website}
-              </Text> */}
             </Box>
             <Box w="100%">
               <Heading size="sm" color="gray.900">
@@ -323,10 +287,7 @@ export function EditProfile() {
     e.preventDefault();
     try {
       auth.setIsLoading(true);
-      const updateprofessional = await updateProfessional(
-        auth?.user?.id,
-        profile
-      );
+      await updateProfessional(auth?.user?.id, profile);
 
       auth.user.name = profile.name;
       auth.user.phone = profile.phone;
@@ -357,7 +318,6 @@ export function EditProfile() {
     }
   }
 
-  console.log(profile);
   return (
     <>
       {/* proffesional */}
@@ -386,7 +346,6 @@ export function EditProfile() {
           px={"2rem"}
           py={"1rem"}
         >
-          {/* noOfLines={1} */}
           <Heading size="md" color="gray.900">
             Personal information
           </Heading>
@@ -514,8 +473,7 @@ export function EditProfileRecruiter() {
     e.preventDefault();
     try {
       auth.setIsLoading(true);
-      const updateRe = await updateRecruiter(auth?.user?.id, profile);
-      console.log(updateRe);
+      await updateRecruiter(auth?.user?.id, profile);
 
       auth.user.name = profile.name;
       auth.user.website = profile.website;
@@ -543,7 +501,6 @@ export function EditProfileRecruiter() {
     }
   }
 
-  console.log(profile);
   return (
     <>
       <Flex
@@ -611,10 +568,6 @@ export function EditProfileRecruiter() {
               value={profile.website}
               onChange={handleChange}
             ></Input>
-
-            {/* <Text fontSize="sm" fontWeight="500">
-                {auth.user?.website}
-              </Text> */}
           </Box>
           <Box w="100%">
             <Heading size="sm" color="gray.900">
@@ -626,7 +579,7 @@ export function EditProfileRecruiter() {
               name="description"
               type="text"
               h={"200px"}
-              value={profile.description}
+              value={profile.description || ""}
               onChange={handleChange}
             ></Textarea>
           </Box>

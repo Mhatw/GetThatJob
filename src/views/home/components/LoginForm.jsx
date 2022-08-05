@@ -16,7 +16,7 @@ import { PasswordInput } from "./PasswordInput";
 export function LoginForm() {
   const auth = useAuth();
   const location = useLocation();
-  console.log(location.pathname.split("/")[2]);
+
   const userType =
     location.pathname.split("/")[2] === "professional"
       ? "Professional"
@@ -67,7 +67,7 @@ export function LoginForm() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(credentials);
+
   return (
     <Box
       rounded={"lg"}

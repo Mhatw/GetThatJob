@@ -1,26 +1,20 @@
 import {
   Box,
   Button,
-  Center,
-  Circle,
-  Flex,
   FormControl,
   FormLabel,
-  Image,
   Input,
   Progress,
-  SimpleGrid,
   Stack,
   Tag,
   TagLabel,
   TagLeftIcon,
-  Text,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { AiFillAlert } from "react-icons/ai";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../services/auth";
 import {
   createProfessional,
@@ -34,7 +28,6 @@ import {
   signupProfessional,
   signupRecruiter,
 } from "../../../services/sessions/user-services";
-import FileUpload from "./FileUpload";
 import { PasswordInput } from "./PasswordInput";
 import { StepProgress } from "./StepProgress";
 
@@ -76,8 +69,7 @@ export function SignupForm() {
   const [imageFile, setImageFile] = useState(null);
   const [cvFile, setCvFile] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
-  console.log(location.pathname.split("/")[2]);
+
   const userType =
     location.pathname.split("/")[2] === "professional"
       ? "Professional"
@@ -92,17 +84,11 @@ export function SignupForm() {
     try {
       auth.setIsLoading(true);
       if (location.pathname.split("/")[2] === "professional") {
-        const updateprofessional = await updateProfessional(
-          id,
-          credentials,
-          cvFile
-        );
-        console.log(updateprofessional, "hereeeee");
+        await updateProfessional(id, credentials, cvFile);
 
         // const user = await signupProfessional(credentials);
       } else {
-        const updateRe = await updateRecruiter(id, credentials, imageFile);
-        console.log(updateRe);
+        await updateRecruiter(id, credentials, imageFile);
       }
 
       toast({
@@ -134,13 +120,11 @@ export function SignupForm() {
       auth.setIsLoading(true);
       if (location.pathname.split("/")[2] === "professional") {
         const professional = await createProfessional();
-        console.log(professional);
+
         setId(professional.id);
         try {
-          const user = await signupProfessional(professional.id, credentials);
-          // auth.setUser(user);
-          // setStep(1);
-          console.log(user);
+          await signupProfessional(professional.id, credentials);
+
           toast({
             title: "Email validation",
             description: "Nice email address",
@@ -165,16 +149,13 @@ export function SignupForm() {
           });
           auth.setIsLoading(false);
         }
-        // const user = await signupProfessional(credentials);
       } else {
         const recruiter = await createRecruiter();
-        console.log(recruiter);
+
         setId(recruiter.id);
         try {
-          const user = await signupRecruiter(recruiter.id, credentials);
-          // auth.setUser(user);
-          // setStep(1);
-          console.log(user);
+          await signupRecruiter(recruiter.id, credentials);
+
           toast({
             title: "Email validation",
             description: "Nice email address",
@@ -228,7 +209,6 @@ export function SignupForm() {
     (credentials.password.match(/[0-9]/g) ? 15 : 0) +
     (credentials.password.match(/[A-Z]/g) ? 15 : 0);
   const progressColor = value < 30 ? "red" : value < 60 ? "yellow" : "green";
-  console.log(credentials);
 
   const step1 = (
     <>
@@ -420,7 +400,6 @@ export function SignupForm() {
             name="image"
             onChange={(e) => {
               setCvFile(e.target.files[0]);
-              console.log(e.target.files[0]);
             }}
           />
         </div>
@@ -483,7 +462,6 @@ export function SignupForm() {
             name="image"
             onChange={(e) => {
               setImageFile(e.target.files[0]);
-              console.log(e.target.files[0]);
             }}
           />
         </div>

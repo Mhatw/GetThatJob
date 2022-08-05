@@ -18,14 +18,13 @@ export async function createProfessional(body) {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
 
 export async function updateProfessional(id, body, cv) {
   const data = new FormData();
-  console.log(cv);
+
   data.append("professional[name]", body?.name);
   data.append("professional[phone]", body?.phone);
   data.append("professional[experience]", body?.experience);
@@ -43,8 +42,6 @@ export async function updateProfessional(id, body, cv) {
     body: data,
   };
   const response = await fetch(`${BASE_URI}/professionals/${id}`, options);
-  // const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }

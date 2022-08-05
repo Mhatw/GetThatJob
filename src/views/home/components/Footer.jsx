@@ -28,7 +28,6 @@ export function Footer() {
         align={{ base: "center", md: "center" }}
       >
         <Image w="80px" src={Logo} alt="logo" />
-        {/* <Text fontSize={"sm"} fontWeight={"semibold"}></Text> */}
         <Center flexDirection={"column"}>
           <Text fontSize={"0.8rem"} mb="0.5rem" fontWeight={"semibold"}>
             Source Code

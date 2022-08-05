@@ -8,7 +8,7 @@ export function Following() {
   const followingJobs = data?.jobs?.filter(
     (mapJob) => mapJob.following === true
   );
-  console.log(followingJobs, "followingJobs");
+
   return (
     <Flex flexDirection={"column"}>
       <Box mt={"2rem"}>

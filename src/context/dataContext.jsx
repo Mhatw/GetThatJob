@@ -19,17 +19,13 @@ export const DataProvider = ({ children }) => {
     auth?.setIsLoading(true);
     try {
       await indexReloadedJobs().then((res) => {
-        console.log(res, "jobs");
         setJobs(res);
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
   async function handleIndexCat() {
     try {
       await indexCategories().then((res) => {
-        console.log(res, "cats");
         setCat(res);
         jobs?.forEach((job) => {
           job["category"] = cat.find((cat) => cat.id === job.category_id).name;
@@ -49,7 +45,6 @@ export const DataProvider = ({ children }) => {
   async function handleIndexTypes() {
     try {
       await indexTypes().then((res) => {
-        console.log(res, "types");
         setTypes(res);
       });
     } catch (error) {
@@ -59,8 +54,6 @@ export const DataProvider = ({ children }) => {
   async function handleIndexStatus() {
     try {
       await indexStatus().then((res) => {
-        console.log(res, "status");
-
         setStatus(res);
       });
     } catch (error) {
@@ -68,11 +61,8 @@ export const DataProvider = ({ children }) => {
     }
   }
   async function handleIndexApplies() {
-    // handleIndexJobs();
     try {
       await indexApplications().then((res) => {
-        console.log(res, "Applies");
-
         auth.setIsLoading(false);
 
         setApplies(res);
@@ -93,7 +83,6 @@ export const DataProvider = ({ children }) => {
     ];
     Promise.all(promises).then(() => {
       auth.setIsLoading(false);
-      console.log("all promises resolved");
     });
   });
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useAuth } from "./auth";
 
 export function UserableAuth({ children }) {
   const auth = useAuth();
-  // const toast = useToast();
+
   let location = useLocation();
   const typeUser =
     auth.user?.user_type === "Professional" ||

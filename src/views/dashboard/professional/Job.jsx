@@ -13,7 +13,6 @@ export function Job() {
   const params = useParams();
   const data = useData();
   const job = data.jobs.find((job) => job.id === parseInt(params?.id));
-  console.log(job, "job");
 
   return (
     <Flex pt="1rem" pb="3rem" minH="100vh" justifyContent={"center"}>

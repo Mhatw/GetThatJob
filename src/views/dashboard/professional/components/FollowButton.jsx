@@ -26,7 +26,6 @@ export function FollowButton({ job }) {
           e.following = !isFollowing;
         }
       });
-      console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -45,9 +44,7 @@ export function FollowButton({ job }) {
     setIsLoading(true);
     try {
       const follows = await indexfollow();
-      console.log(follows, "follows");
-      console.log(job.id, "job.id");
-      console.log(follows?.find((e) => e.job_id === job.id).id, "aaaaaaaaa");
+
       try {
         const followId = follows?.find((e) => e.job_id === job.id).id;
         await unfollowJob(followId);
@@ -68,8 +65,6 @@ export function FollowButton({ job }) {
           isClosable: true,
         });
       }
-
-      console.log(data.jobs, "asdfasdfasdfa");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -79,19 +74,12 @@ export function FollowButton({ job }) {
         duration: 3000,
         isClosable: true,
       });
-      // if (error?.response?.data?.unauthorized) {
-      //   auth.setUser(null);
-      // }
     }
   };
 
   useSingleEffect(() => {
     setIsFollowing(job?.following);
   });
-
-  // useEffect(() => {
-
-  // }, [isFollowing, data.jobs, job.id]);
 
   return (
     <Button

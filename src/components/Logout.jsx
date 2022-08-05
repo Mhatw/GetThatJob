@@ -38,7 +38,6 @@ export function Logout() {
       onClick={handleLogout}
       leftIcon={<BiLogOutCircle />}
       type="submit"
-      // size={"sm"}
       w={"100%"}
       borderRadius={"0"}
       isLoading={auth.isLoading}

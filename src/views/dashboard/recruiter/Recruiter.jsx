@@ -5,16 +5,6 @@ import { Outlet } from "react-router";
 
 import { NavBar } from "../../../components";
 
-//   return (
-//     <>
-//       <h1>recruiter</h1>
-//       <Link to="post-job">post-job</Link>
-//       <Link to="create-job">create-job</Link>
-//       <Link to="profile">profile</Link>
-//       <Outlet />
-//     </>
-//   );
-// }
 const professionalNav = [
   {
     name: "Job Postings",

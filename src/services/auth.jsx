@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
         setUser(null);
-        // setIsLogin(false);
+
         setIsLoadingView(false);
       });
   });
@@ -36,18 +36,16 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
         setUser(null);
-        // setIsLogin(false);
+
         setIsLoadingView(false);
       });
   }, [isLogin]);
 
   function handleLogin(credentials) {
-    console.log("validating credentials");
-    console.log("user-pre", user);
     return login(credentials).then((user) => {
       setUser(user);
       setIsLogin(user);
-      console.log("user", user?.user_type);
+
       const route =
         user?.user_type === "Professional"
           ? "/dashboard/professional/find-job/all"
@@ -57,7 +55,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   function handleLogout(credentials) {
-    console.log("logout");
     return logout().then((user) => {
       setUser(null);
       setIsLogin(false);

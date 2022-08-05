@@ -9,18 +9,14 @@ import {
   Center,
   Flex,
   Heading,
-  Image,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { BiMessageAltDots } from "react-icons/bi";
-import { FiSend } from "react-icons/fi";
-import { useAuth } from "../../../../services/auth";
+
 import { postedString, salaryString } from "../../professional/utilities";
 
 export function PostingCard({ job }) {
-  const auth = useAuth();
   return (
     <AccordionItem bg={"white"}>
       <AccordionButton>
@@ -60,16 +56,6 @@ export function PostingCard({ job }) {
                   {postedString(job?.created_at)}
                 </Badge>
               </Stack>
-              {/* <Box>
-                <Text fontSize={"0.8rem"} display="flex" alignItems="center">
-                  <FiSend />
-                  &nbsp; Sent {postedString(apply?.created_at)}
-                </Text>
-                <Text fontSize={"0.8rem"} display="flex" alignItems="center">
-                  <BiMessageAltDots />
-                  &nbsp;{apply?.status?.name}
-                </Text>
-              </Box> */}
             </Stack>
             <Stack direction="row" py="0.5rem"></Stack>
           </Flex>

@@ -28,7 +28,7 @@ export function JobApply() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(apply, "applyy");
+
   return (
     <Flex pt="1rem" pb="3rem" minH="100vh" justifyContent={"center"}>
       <Box maxW={"60em"}>
@@ -57,7 +57,7 @@ export function JobApply() {
               resize={"vertical"}
               name="experience"
               id={"experience"}
-              value={apply.experience}
+              value={apply.experience || ""}
               bg="white"
               onChange={(e) => handleChange(e)}
             />

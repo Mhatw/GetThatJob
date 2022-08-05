@@ -10,11 +10,9 @@ export async function indexJobs() {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data.reverse();
 }
-// reloaded_jobs
 export async function indexReloadedJobs() {
   const options = {
     method: "GET",
@@ -24,7 +22,6 @@ export async function indexReloadedJobs() {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data.reverse();
 }
@@ -49,7 +46,6 @@ export async function createJob(body) {
     },
   };
   const response = await axios.request(options);
-  // const { token, ...user } = response.data;
 
   return response.data;
 }
