@@ -98,11 +98,11 @@ export function FollowButton({ job }) {
       isLoading={isLoading}
       fontSize={"sm"}
       colorScheme={isFollowing ? "orange" : "gray"}
-      variant={isFollowing ? "solid" : "ghost"}
+      variant={isFollowing ? "solid" : "outline"}
       leftIcon={<BiTargetLock />}
       onClick={isFollowing ? handleUnfollow : handleFollow}
     >
-      {isFollowing && <span>Following</span>}
+      {isFollowing && <span>Following &nbsp;&nbsp; </span>}
       {!isFollowing && <span>Follow job</span>}
     </Button>
   );

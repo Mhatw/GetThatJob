@@ -11,6 +11,9 @@ export function HeaderCompanyJob({ job, isLink }) {
         maxW="130px"
         bg="gray.100"
         w={["30%", "30%", "130px"]}
+        h={["30%", "30%", "130px"]}
+        // border="1px"
+        // borderColor={"red"}
         borderRadius="lg"
         src={job?.logo_url}
       />
