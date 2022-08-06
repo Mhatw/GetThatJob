@@ -28,7 +28,8 @@ const members = [
   {
     name: "Frank Cano",
     role: "Full Stack Developer",
-    description: "Web developer",
+    description:
+      "Web developer and Energy Engineering student with experience in diferents projects and research. I am also a graduated of Codeable where I learned different technologies and be able to work as a full stack programmer, my strengths are analytical capacity, team player, quick learning. I like technologies so much and I am looking for a job that allows me to develop my skills and where I can to grow up.",
     image: Frank,
     github: "https://github.com/frankcdlc",
     linkedin: "https://www.linkedin.com/in/frank-cano-dlc/",
