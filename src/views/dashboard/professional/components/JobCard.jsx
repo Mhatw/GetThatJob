@@ -88,7 +88,15 @@ export function JobCard({ job }) {
                   </Badge>
                 )}
               </Text>
-              <Heading fontSize={"2xl"} fontFamily={"body"} m={"0"}>
+              <Heading
+                fontSize={"2xl"}
+                fontFamily={"body"}
+                lineHeight={"1"}
+                m={"0"}
+                w={["237px", "200px", "280px", "270px", "200px"]}
+                h={["50px"]}
+                textOverflow={"ellipsis"}
+              >
                 {job?.name}
               </Heading>
               <Text
@@ -99,6 +107,10 @@ export function JobCard({ job }) {
                 overflow={"hidden"}
                 w="200px"
                 h="40px"
+                // textOverflow={"ellipsis"}
+                // whiteSpace={"nowrap"}
+                // bg="#99c3d0"
+                // border="1px"
               >
                 {job?.company.name}
               </Text>

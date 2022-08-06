@@ -26,7 +26,7 @@ export function Company() {
       <Center mt={"1rem"}>
         <SimpleGrid
           columns={[1, 1, 1, 1, 2, 3, 4]}
-          px={"4rem"}
+          px={"3rem"}
           gap="1.5rem"
           maxW={"96em"}
           overflowX={"scroll"}
