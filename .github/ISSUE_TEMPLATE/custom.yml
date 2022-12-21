@@ -7,22 +7,6 @@ body:
     attributes:
       value: |
         Remember to be clear and concise when you explain the issue
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: A detailed, concise and accurate description of the problem, including any relevant context or information.
-      value: "A bug happened!"
-    validations:
-      required: true
   - type: dropdown
     id: Project
     attributes:
@@ -32,15 +16,23 @@ body:
         - Kiosco
         - Dashboard
         - Monorepo
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A detailed, concise and accurate description of the problem, including any relevant context or information.
+      value: "A bug happened!"
+    validations:
+      required: true
   - type: textarea
     id: Expected-performance
     attributes:
       label: Expected performance
       description: A description of how the feature should work or how the problem should be resolved.
-      render: shell
   - type: textarea
     id: Current-performance
     attributes:
       label: Current performance
       description: A description of how the feature is currently working or how the problem is currently occurring.
-      render: shell
