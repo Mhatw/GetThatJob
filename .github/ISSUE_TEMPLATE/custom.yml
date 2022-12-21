@@ -18,13 +18,12 @@ body:
         - Monorepo
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: todo-ids
     attributes:
       label: Todo's
       description: "Anote los Todo's relacionados con el problema."
       placeholder: CJEA-ddmmyy-HHmm
-      render: shell
   - type: textarea
     id: what-happened
     attributes:
