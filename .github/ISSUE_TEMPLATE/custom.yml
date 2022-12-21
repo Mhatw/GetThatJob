@@ -1,4 +1,4 @@
-name: Bug Issue
+name: 🐛Bug Report
 description: Issue for a bug
 title: "[Bug]: "
 labels: ["bug"]
@@ -18,6 +18,12 @@ body:
         - Monorepo
     validations:
       required: true
+  - type: textarea
+    id: todo-ids
+    attributes:
+      label: Todo's codes
+      description: Place here the todo's related to the bug
+      placeholder: CJEA-ddmmyy-HHmm
   - type: textarea
     id: what-happened
     attributes:
