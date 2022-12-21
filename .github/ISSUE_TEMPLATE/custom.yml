@@ -6,11 +6,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        Remember to be clear and concise when you explain the issue
+        Recuerda ser claro y conciso cuando expliques el problema
   - type: dropdown
     id: Project
     attributes:
-      label: Which project is the problem occurring?
+      label: ¿En qué proyecto se produce el problema?
       multiple: true
       options:
         - Kiosco
@@ -21,24 +21,27 @@ body:
   - type: textarea
     id: todo-ids
     attributes:
-      label: Todo's codes
-      description: Place here the todo's related to the bug
+      label: Todo's
+      description: "Anote los Todo's relacionados con el problema."
       placeholder: CJEA-ddmmyy-HHmm
+      render: shell
   - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: A detailed, concise and accurate description of the problem, including any relevant context or information.
-      value: "A bug happened!"
+      label: ¿Cual es el bug 🐛?
+      description: "Incluya detalles sobre el problema o la solicitud, incluyendo el contexto relevante y los pasos para reproducir el problema o implementar la solicitud."
+      placeholder: Cuando intento cargar la página de inicio, obtengo un error "404 Not Found". Esto sucede en todos los navegadores que he probado (Chrome, Firefox, Edge).
     validations:
       required: true
   - type: textarea
     id: Expected-performance
     attributes:
-      label: Expected performance
-      description: A description of how the feature should work or how the problem should be resolved.
+      label: Comportamiento esperado
+      description: Describa cómo debería funcionar la característica o cómo debería solucionarse el problema.
+      placeholder: La página de inicio debería cargarse correctamente.
   - type: textarea
     id: Current-performance
     attributes:
-      label: Current performance
-      description: A description of how the feature is currently working or how the problem is currently occurring.
+      label: Comportamiento actual
+      description: Describa cómo está funcionando actualmente la característica o cómo se presenta actualmente el problema.
+      placeholder: La página de inicio muestra un error "404 Not Found".
